@@ -1,0 +1,24 @@
+apply plugin: 'java-library'
+
+dependencies {
+    def depNetwork = rootProject.ext.libNetwork
+    implementation depNetwork.okHttp
+    implementation depNetwork.okHttpInterceptor
+    implementation depNetwork.retrofit
+    implementation depNetwork.retrofitRxJava2
+    implementation depNetwork.retrofitJackson
+    implementation depNetwork.jacksonCore
+    implementation depNetwork.jacksonAnnotation
+    implementation depNetwork.jacksonDataBind
+
+    def depTest = rootProject.ext.libTest
+    testImplementation depTest.junit
+    testImplementation depTest.kotlinJUnit
+    testImplementation depTest.assertj
+    testImplementation depTest.mockito
+
+    api project(path: ':data')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
