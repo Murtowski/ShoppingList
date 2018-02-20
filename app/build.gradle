@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def apkVersionNumber = "0.0.1"
+    def apkName = "ShoppingList"
+    def project = rootProject.ext
+
+    compileSdkVersion project.androidCompileSdkVersion
+    buildToolsVersion project.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "murt.shoppinglistapp"
+        minSdkVersion project.androidMinSdkVersion
+        targetSdkVersion project.androidTargetSdkVersion
+
+        versionCode 1
+        versionName apkVersionNumber
+        setProperty("archivesBaseName", "$apkName v$apkVersionNumber")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/LICENSE'
+        exclude 'LICENSE.txt'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
+}
+
+dependencies {
+    implementation project(path: ':remote')
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def depGeneral = rootProject.ext.libPlatform
+    implementation depGeneral.multidex
+
+    def depSupportLib = rootProject.ext.libSupport
+    implementation depSupportLib.supportV7
+    implementation depSupportLib.supportDesign
+    implementation depSupportLib.supportV4
+    implementation depSupportLib.supportCardView
+    implementation depSupportLib.supportRecyclerView
+    implementation depSupportLib.supportVectors
+    implementation depSupportLib.supportConstrain
+
+    def depRx = rootProject.ext.libRxJava2
+    implementation depRx.rxAndroid
+    //
+//    def depOther = rootProject.ext.libOthers
+//    implementation depOther.dateJ8
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}

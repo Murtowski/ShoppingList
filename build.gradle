@@ -1,0 +1,128 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.2.21'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    //Android
+    androidBuildToolsVersion = "27.0.0"
+    androidMinSdkVersion = 17
+    androidTargetSdkVersion = 27
+    androidCompileSdkVersion = androidTargetSdkVersion
+
+    libPlatform = [
+            multidex: "com.android.support:multidex:1.0.2",
+            kotlinJre8: "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
+            kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19.3"
+    ]
+
+    String supportLibrary = '27.0.2'
+    String supportConstrainLayout = '1.1.0-beta5'
+
+    libSupport = [
+            supportV7:              "com.android.support:appcompat-v7:$supportLibrary",
+            supportDesign:          "com.android.support:design:${supportLibrary}",
+            supportV4:              "com.android.support:support-v4:${supportLibrary}",
+            supportCardView:        "com.android.support:cardview-v7:${supportLibrary}",
+            supportRecyclerView:    "com.android.support:recyclerview-v7:${supportLibrary}",
+            supportVectors:         "com.android.support:support-vector-drawable:${supportLibrary}",
+            supportConstrain:       "com.android.support.constraint:constraint-layout:$supportConstrainLayout"
+    ]
+
+    // Android Architecture
+    String androidArch = '1.0.0'
+    String androidArchExtension = '1.1.0'
+    String androidArchPaging = '1.0.0-alpha4-1'
+
+    libArchitectureComponents = [
+            // ViewModel, LiveData
+            commonJava8:            "android.arch.lifecycle:common-java8:$androidArch",
+            extension:              "android.arch.lifecycle:extensions:$androidArchExtension",
+            compiler:               "android.arch.lifecycle:compiler:$androidArch",
+            reactiveStreams:        "android.arch.lifecycle:reactivestreams:$androidArchExtension",
+            // Room
+            roomRuntime:            "android.arch.persistence.room:runtime:$androidArch",
+            roomRxJava2:            "android.arch.persistence.room:rxjava2:$androidArch",
+            roomCompiler:           "android.arch.persistence.room:compiler:$androidArch",
+            roomPaging:             "android.arch.paging:runtime:$androidArchPaging"
+    ]
+
+    String squareOkHttp = '3.9.1'
+    String squareOkHttpInterceptor = '3.8.1'
+    String squareRetrofit = '2.3.0'
+    String jsonJackson = '2.9.1'
+
+    libNetwork = [
+            okHttp:             "com.squareup.okhttp3:okhttp:$squareOkHttp",
+            okHttpInterceptor:  "com.squareup.okhttp3:logging-interceptor:$squareOkHttpInterceptor",
+            retrofit:           "com.squareup.retrofit2:retrofit:$squareRetrofit",
+            retrofitRxJava2:    "com.squareup.retrofit2:adapter-rxjava2:$squareRetrofit",
+            retrofitJackson:    "com.squareup.retrofit2:converter-jackson:$squareRetrofit",
+            jacksonCore:        "com.fasterxml.jackson.core:jackson-core:$jsonJackson",
+            jacksonAnnotation:  "com.fasterxml.jackson.core:jackson-annotations:$jsonJackson",
+            jacksonDataBind:    "com.fasterxml.jackson.core:jackson-databind:$jsonJackson",
+    ]
+
+    String rxJava2Android = '2.0.1'
+    String rxJava2Java = '2.1.1'
+    String rxJava2Kotlin = '2.1.0'
+
+    libRxJava2 = [
+            rxAndroid:  "io.reactivex.rxjava2:rxandroid:$rxJava2Android",
+            rxJava:     "io.reactivex.rxjava2:rxjava:$rxJava2Java",
+            rxKotlin:   "io.reactivex.rxjava2:rxkotlin:$rxJava2Kotlin"
+    ]
+
+
+    String daggerV = '2.11'
+
+    libDependencyInjection = [
+            dagger:                 "com.google.dagger:dagger:$daggerV",
+            daggerAndroid:          "com.google.dagger:dagger-android:$daggerV",
+            daggerAndroidSupport:   "com.google.dagger:dagger-android-support:$daggerV",
+            daggerCompiler:         "com.google.dagger:dagger-compiler:$daggerV",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$daggerV",
+            daggerGlassFish:        'org.glassfish:javax.annotation:10.0-b28',
+            javaxInject:            "javax.inject:javax.inject:1",
+    ]
+
+    libOthers = [
+            //            joda:       "net.danlew:android.joda:2.9.9.1",
+            timber:     "com.jakewharton.timber:timber:4.6.0",
+            dateJ8:     "com.jakewharton.threetenabp:threetenabp:1.0.5"
+    ]
+
+    String jUnitVersion = '4.12'
+    assertJVersion = '3.8.0'
+    mockitoKotlinVersion = '1.5.0'
+
+
+    libTest = [
+            junit:              "junit:junit:${jUnitVersion}",
+            kotlinJUnit:        "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
+            assertj:            "org.assertj:assertj-core:$assertJVersion",
+            mockito:            "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion",
+    ]
+
+}

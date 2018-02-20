@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+
+    def depPlatform = rootProject.ext.libPlatform
+    api depPlatform.kotlinJre8
+
+    def depRxJava = rootProject.ext.libRxJava2
+    api depRxJava.rxKotlin
+
+    def depDagger = rootProject.ext.libDependencyInjection
+    api depDagger.javaxInject
+
+
+    def depOthers = rootProject.ext.libOthers
+    api depOthers.dateJ8
+    api depOthers.timber
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
