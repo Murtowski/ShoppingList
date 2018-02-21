@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShoppingListApp</string>
+    <string name="title_activity_shopping_history">ShoppingHistory</string>
+    <string name="title_activity_shopping_list">ShoppingList</string>
 </resources>

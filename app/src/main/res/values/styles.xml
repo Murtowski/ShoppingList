@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!--TEXT STYLES-->
+
+    <style name="TextLarge" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/text_default</item>
+    </style>
+
+    <style name="TextMedium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/text_default</item>
+    </style>
+
+    <style name="TextSmall" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/text_default</item>
+    </style>
+
+
+    <!--END OF TEXT STYLES-->
+
+
 </resources>

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     def project = rootProject.ext
@@ -47,13 +48,29 @@ dependencies {
     api project(path: ':data')
 
     def depAndroidArch = rootProject.ext.libArchitectureComponents
-    implementation depAndroidArch.commonJava8
-    implementation depAndroidArch.extension
-    implementation depAndroidArch.compiler
-    implementation depAndroidArch.reactiveStreams
+    api depAndroidArch.commonJava8
+    api depAndroidArch.extension
+    kapt depAndroidArch.compiler
+    api depAndroidArch.reactiveStreams
     // Room
     implementation depAndroidArch.roomRuntime
     implementation depAndroidArch.roomRxJava2
-    implementation depAndroidArch.roomCompiler
+    kapt depAndroidArch.roomCompiler
     implementation depAndroidArch.roomPaging
+
+//    String androidLifecycle = '1.0.0'
+//    String androidLifecycleExtension = '1.1.0'
+//    implementation "android.arch.lifecycle:common-java8:$androidLifecycleExtension"
+//    implementation "android.arch.lifecycle:extensions:$androidLifecycleExtension"
+//    annotationProcessor "android.arch.lifecycle:compiler:$androidLifecycle"
+//    kapt "android.arch.lifecycle:compiler:$androidLifecycle"
+//    implementation "android.arch.lifecycle:reactivestreams:$androidLifecycleExtension"
+//
+//    // Room - DB ORM
+//    implementation "android.arch.persistence.room:runtime:$androidLifecycle"
+//    compile "android.arch.persistence.room:rxjava2:${androidLifecycle}" // RxJava2 Support
+//    annotationProcessor "android.arch.persistence.room:compiler:$androidLifecycle"
+//    kapt "android.arch.persistence.room:compiler:$androidLifecycle"
+//    // Paging
+//    implementation "android.arch.paging:runtime:1.0.0-alpha4-1"
 }

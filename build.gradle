@@ -53,13 +53,13 @@ ext {
     // Android Architecture
     String androidArch = '1.0.0'
     String androidArchExtension = '1.1.0'
-    String androidArchPaging = '1.0.0-alpha4-1'
+    String androidArchPaging = '1.0.0-alpha5'
 
     libArchitectureComponents = [
             // ViewModel, LiveData
-            commonJava8:            "android.arch.lifecycle:common-java8:$androidArch",
+            commonJava8:            "android.arch.lifecycle:common-java8:$androidArchExtension", // support java8
             extension:              "android.arch.lifecycle:extensions:$androidArchExtension",
-            compiler:               "android.arch.lifecycle:compiler:$androidArch",
+            compiler:               "android.arch.lifecycle:compiler:$androidArchExtension",
             reactiveStreams:        "android.arch.lifecycle:reactivestreams:$androidArchExtension",
             // Room
             roomRuntime:            "android.arch.persistence.room:runtime:$androidArch",
