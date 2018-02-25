@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_shopping_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="murt.shoppinglistapp.ui.shoppingList.ShoppingListActivity">
@@ -21,7 +22,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_shopping_list"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/shopping_list_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="murt.shoppinglistapp.ui.shoppingList.ShoppingListActivity"
+        tools:showIn="@layout/activity_shopping_list"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/shopping_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_shopping"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

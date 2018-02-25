@@ -1,6 +1,9 @@
 apply plugin: 'java-library'
+apply plugin: 'kotlin'
 
 dependencies {
+    api project(path: ':data')
+
     def depNetwork = rootProject.ext.libNetwork
     implementation depNetwork.okHttp
     implementation depNetwork.okHttpInterceptor
@@ -17,7 +20,7 @@ dependencies {
     testImplementation depTest.assertj
     testImplementation depTest.mockito
 
-    api project(path: ':data')
+
 }
 
 sourceCompatibility = "1.7"

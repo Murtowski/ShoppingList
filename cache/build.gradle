@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     def project = rootProject.ext
@@ -44,6 +45,10 @@ android {
 
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     api project(path: ':data')
 
@@ -53,24 +58,9 @@ dependencies {
     kapt depAndroidArch.compiler
     api depAndroidArch.reactiveStreams
     // Room
-    implementation depAndroidArch.roomRuntime
+    api depAndroidArch.roomRuntime
     implementation depAndroidArch.roomRxJava2
     kapt depAndroidArch.roomCompiler
     implementation depAndroidArch.roomPaging
 
-//    String androidLifecycle = '1.0.0'
-//    String androidLifecycleExtension = '1.1.0'
-//    implementation "android.arch.lifecycle:common-java8:$androidLifecycleExtension"
-//    implementation "android.arch.lifecycle:extensions:$androidLifecycleExtension"
-//    annotationProcessor "android.arch.lifecycle:compiler:$androidLifecycle"
-//    kapt "android.arch.lifecycle:compiler:$androidLifecycle"
-//    implementation "android.arch.lifecycle:reactivestreams:$androidLifecycleExtension"
-//
-//    // Room - DB ORM
-//    implementation "android.arch.persistence.room:runtime:$androidLifecycle"
-//    compile "android.arch.persistence.room:rxjava2:${androidLifecycle}" // RxJava2 Support
-//    annotationProcessor "android.arch.persistence.room:compiler:$androidLifecycle"
-//    kapt "android.arch.persistence.room:compiler:$androidLifecycle"
-//    // Paging
-//    implementation "android.arch.paging:runtime:1.0.0-alpha4-1"
 }

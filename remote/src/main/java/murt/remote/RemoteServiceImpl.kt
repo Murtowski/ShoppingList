@@ -10,8 +10,7 @@ import javax.inject.Inject
 /**
  * Piotr Murtowski on 20.02.2018.
  */
-class RemoteServiceImpl @Inject constructor(private val networkService: NetworkService):
-    RemoteService {
+class RemoteServiceImpl @Inject constructor(private val networkService: NetworkService): RemoteService {
 
     override fun getShoppingList(): Single<List<ShoppingItem>> {
         return networkService.getShoppingList()

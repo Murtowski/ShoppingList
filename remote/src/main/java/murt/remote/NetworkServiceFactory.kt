@@ -1,5 +1,6 @@
 package murt.remote
 
+import murt.data.repository.RemoteService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,19 +17,19 @@ class NetworkServiceFactory{
     private val readTimeout = 20000
     private val writeTimeout = 20000
 
-
-    fun getNetworkService(isDebug: Boolean): Retrofit {
+    fun createNetworkService(isDebug: Boolean): NetworkService {
         return retrofit2.Retrofit.Builder()
             .client(getDefaultHttpClient(isDebug))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(provideRESTServerUrl())
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
+            .create(NetworkService::class.java)
 
     }
 
     private fun provideRESTServerUrl(): String {
-        return "endpoint-api"
+        return "endpoint-api" // PROVIDE REAL PATH here
     }
 
     private fun getDefaultHttpClient(isDebug: Boolean): OkHttpClient {

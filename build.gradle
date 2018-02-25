@@ -94,6 +94,17 @@ ext {
             rxKotlin:   "io.reactivex.rxjava2:rxkotlin:$rxJava2Kotlin"
     ]
 
+//    String rxBinding = '2.1.1'
+
+//    libRxBinding = [
+//            rxBinding: "compile 'com.jakewharton.rxbinding2:rxbinding:$rxBinding",
+//            rxBindingV4: "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBinding",
+//            rxBindingV7: "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBinding",
+//            rxBindingDesign: "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBinding",
+//            rxBindingRV: "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:$rxBinding",
+//            rxBindingLeanback: "com.jakewharton.rxbinding2:rxbinding-leanback-v17-kotlin:$rxBinding"
+//    ]
+
 
     String daggerV = '2.11'
 

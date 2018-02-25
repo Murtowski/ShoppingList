@@ -1,5 +1,6 @@
 package murt.shoppinglistapp.ui.shoppingList
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -9,21 +10,31 @@ import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.utils.getReadableDate
 import murt.shoppinglistapp.ui.utils.inflate
 
+
+
 /**
  * Piotr Murtowski on 21.02.2018.
  */
 class ShoppingListAdapter(
     val items: MutableList<ShoppingItem> = mutableListOf(),
-    val viewMode: VIEW_MODE = VIEW_MODE.VIEW,
+    val viewMode: EnumViewMode = EnumViewMode.VIEW,
     val onDeleteClick: (ShoppingItem) -> Unit
 ): RecyclerView.Adapter<ShoppingListAdapter.ShoppingItemViewHolder>() {
-
-
 
     fun insertNewShoppingList(list: List<ShoppingItem>){
         items.clear()
         items.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun insertNewItem(item: ShoppingItem){
+        // create new list
+        val newList = mutableListOf<ShoppingItem>()
+        newList.addAll(items)
+        newList.add(item)
+
+        val diffResult = DiffUtil.calculateDiff(MyDiffUtils(items, newList))
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingItemViewHolder {
@@ -46,8 +57,24 @@ class ShoppingListAdapter(
         }
     }
 
-    enum class VIEW_MODE{
-        EDIT,
-        VIEW
+
+
+
+    class MyDiffUtils(
+        val oldList: List<ShoppingItem>,
+        val newList: List<ShoppingItem>
+    ): DiffUtil.Callback(){
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].title == newList[newItemPosition].title
+        }
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
     }
 }

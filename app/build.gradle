@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt' // creates the necessary self-generated classes for Dagger.
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -49,13 +49,19 @@ android {
         abortOnError false
         ignoreWarnings true
     }
+
+
+}
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {
-    implementation project(path: ':remote')
-    implementation project(path: ':cache')
+    api project(':remote')
+    api project(':cache')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     def depGeneral = rootProject.ext.libPlatform
     implementation depGeneral.multidex
@@ -71,14 +77,27 @@ dependencies {
 
     def depRx = rootProject.ext.libRxJava2
     implementation depRx.rxAndroid
-    //
-//    def depOther = rootProject.ext.libOthers
-//    implementation depOther.dateJ8
 
-//
-//    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    def depDagger = rootProject.ext.libDependencyInjection
+    implementation depDagger.dagger
+    implementation depDagger.daggerAndroid
+    implementation depDagger.daggerAndroidSupport
+    annotationProcessor depDagger.daggerCompiler
+    kapt depDagger.daggerCompiler
+    annotationProcessor depDagger.daggerAndroidProcessor
+    kapt depDagger.daggerAndroidProcessor
+
+
+
+
+//    String dagger = '2.11'
+//    implementation "com.google.dagger:dagger:${dagger}"
+//    implementation "com.google.dagger:dagger-android:${dagger}"
+//    implementation "com.google.dagger:dagger-android-support:${dagger}"
+//    annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
+//    annotationProcessor "com.google.dagger:dagger-android-processor:${dagger}"
+//    kapt "com.google.dagger:dagger-compiler:${dagger}"
+//    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+
 }
