@@ -1,5 +1,6 @@
 package murt.shoppinglistapp.injection
 
+import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,7 @@ import javax.inject.Singleton
  */
 
 @Module
-open class CacheModule(val context: Context) {
+open class CacheModule {
 
     @Singleton
     @Provides
@@ -24,7 +25,7 @@ open class CacheModule(val context: Context) {
 
     @Singleton
     @Provides
-    fun provideDatabase(): RoomDatabaseCache {
-        return CacheServiceFactory().createRemoteService(context)
+    fun provideDatabase(application: Application): RoomDatabaseCache {
+        return CacheServiceFactory().createRemoteService(application)
     }
 }

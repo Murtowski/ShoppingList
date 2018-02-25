@@ -60,6 +60,7 @@ dependencies {
     // Room
     api depAndroidArch.roomRuntime
     implementation depAndroidArch.roomRxJava2
+    annotationProcessor depAndroidArch.roomCompiler
     kapt depAndroidArch.roomCompiler
     implementation depAndroidArch.roomPaging
 
