@@ -1,43 +1,61 @@
-package murt.shoppinglistapp.ui.shoppingList
+package murt.shoppinglistapp.ui.shoppingListDetails
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.View
 import murt.shoppinglistapp.R
 
-import kotlinx.android.synthetic.main.activity_shopping_list.*
+import kotlinx.android.synthetic.main.activity_shopping_list_details.*
 import murt.data.model.ShoppingItem
 import murt.shoppinglistapp.ui.MyActivity
-import android.view.MenuInflater
 import android.view.MenuItem
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 
-class ShoppingListActivity : MyActivity() {
+class ShoppingListDetailsActivity : MyActivity() {
 
-    private val shoppingAdapter by lazy { ShoppingListAdapter(onDeleteClick = this::onDeleteClick) }
+    companion object {
+        private const val EXTRA_SHOPPING_LIST_ID = "shoppingListID"
+
+        fun openShoppingListDetails(context: Context, shoppingListID: Long){
+            val intent = Intent(context, ShoppingListDetailsActivity::class.java).apply {
+                putExtra(EXTRA_SHOPPING_LIST_ID, shoppingListID)
+            }
+            context.startActivity(intent)
+        }
+    }
+
+    private val shoppingAdapter by lazy { ShoppingListDetailsAdapter(onDeleteClick = this::onDeleteClick) }
 
     private var deletedItem: ShoppingItem ?= null
+    var shoppingListId: Long = -1L // -1 means that have to create new shopping list
 
     @Inject
-    lateinit var mViewModelFactory: ShoppingListViewModelFactory
-    lateinit var mViewModel: ShoppingListViewModel
+    lateinit var mViewModelFactory: ShoppingListDetailsViewModelFactory
+    private lateinit var mViewModel: ShoppingListDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_list)
+        setContentView(R.layout.activity_shopping_list_details)
         setSupportActionBar(toolbar)
 
+        shoppingListId = intent.getLongExtra(EXTRA_SHOPPING_LIST_ID, -1L)
+
+        setUpView()
+        setUpViewModel()
 
     }
 
     private fun setUpView(){
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            shoppingAdapter.insertNewItem(ShoppingItem.new())
         }
 
         shopping_list_recycler_view.adapter = shoppingAdapter
@@ -45,7 +63,19 @@ class ShoppingListActivity : MyActivity() {
 
     private fun setUpViewModel(){
         mViewModel = ViewModelProviders.of(this, mViewModelFactory)
-            .get(ShoppingListViewModel::class.java)
+            .get(ShoppingListDetailsViewModel::class.java)
+
+        if(shoppingListId == -1L){
+            mViewModel.createNewShoppingList()
+        }else{
+            observeShoppingList(shoppingListId)
+        }
+    }
+
+    private fun observeShoppingList(id: Long){
+        mViewModel.getShoppingList(id)?.observe(this, Observer {
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">ShoppingListApp</string>
-    <string name="title_activity_shopping_history">ShoppingHistory</string>
-    <string name="title_activity_shopping_list">ShoppingList</string>
+    <string name="app_name">ShoppingList</string>
     <string name="undo">Undo</string>
     <string name="item_deleted">Item deleted</string>
+    <string name="title_shopping_list_details">Shopping Details</string>
+    <string name="title_shopping_list">Shopping List</string>
+    <string name="title_archived_shopping_list">Archived Shopping List</string>
+
 </resources>

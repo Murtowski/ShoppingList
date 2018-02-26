@@ -31,6 +31,10 @@
         <item name="android:textColor">@color/text_default</item>
     </style>
 
+    <style name="ShoppingListTitle" parent="TextLarge">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 
     <!--END OF TEXT STYLES-->
 

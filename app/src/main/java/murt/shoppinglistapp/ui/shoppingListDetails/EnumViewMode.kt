@@ -1,4 +1,4 @@
-package murt.shoppinglistapp.ui.shoppingList
+package murt.shoppinglistapp.ui.shoppingListDetails
 
 /**
  * Piotr Murtowski on 25.02.2018.

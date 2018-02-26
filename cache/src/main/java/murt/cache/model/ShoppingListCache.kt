@@ -13,17 +13,21 @@ import org.threeten.bp.LocalDateTime
 @Entity(tableName = ShoppingListCache.TABLE_NAME)
 class ShoppingListCache(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = PARENT_COLUMN)
+    @ColumnInfo(name = COLUMN_PARENT_ID)
     var id: Long = -1L,
     var title: String = "",
     @TypeConverters(LocalDateTimeConverter::class)
-    var createdAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+    @ColumnInfo(name = COLUMN_IS_ARCHIVED)
+    var isArchived: Boolean = false
 ) {
 
     companion object {
         const val TABLE_NAME = "ShoppingList"
-        const val PARENT_COLUMN = "id"
+        const val COLUMN_PARENT_ID = "id"
+        const val COLUMN_IS_ARCHIVED = "isArchived"
 
-        fun emptyInstance() = ShoppingListCache(-1L, "", LocalDateTime.now())
+
+        fun emptyInstance() = ShoppingListCache(-1L, "", LocalDateTime.now(), true)
     }
 }

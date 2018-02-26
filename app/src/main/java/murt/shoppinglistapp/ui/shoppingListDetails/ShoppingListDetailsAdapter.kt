@@ -1,4 +1,4 @@
-package murt.shoppinglistapp.ui.shoppingList
+package murt.shoppinglistapp.ui.shoppingListDetails
 
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -15,11 +15,11 @@ import murt.shoppinglistapp.ui.utils.inflate
 /**
  * Piotr Murtowski on 21.02.2018.
  */
-class ShoppingListAdapter(
+class ShoppingListDetailsAdapter(
     val items: MutableList<ShoppingItem> = mutableListOf(),
     val viewMode: EnumViewMode = EnumViewMode.VIEW,
     val onDeleteClick: (ShoppingItem) -> Unit
-): RecyclerView.Adapter<ShoppingListAdapter.ShoppingItemViewHolder>() {
+): RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
 
     fun insertNewShoppingList(list: List<ShoppingItem>){
         items.clear()
@@ -53,7 +53,7 @@ class ShoppingListAdapter(
 
         fun onBind(item: ShoppingItem){
             title.text = item.title
-            date.text = item.date.getReadableDate(date.context)
+            date.text = item.createdAt.getReadableDate(date.context)
         }
     }
 

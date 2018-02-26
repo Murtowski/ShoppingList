@@ -8,17 +8,17 @@
     android:orientation="horizontal"
     >
 
-    <ImageView
-        android:id="@+id/item_shopping_selection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_unselected"
-        android:padding="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_gravity="center_vertical"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
+    <!--<ImageView-->
+        <!--android:id="@+id/item_shopping_selection"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:srcCompat="@drawable/ic_unselected"-->
+        <!--android:padding="8dp"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:visibility="gone"-->
+        <!--tools:visibility="visible"-->
+        <!--/>-->
 
     <android.support.v7.widget.CardView
 
