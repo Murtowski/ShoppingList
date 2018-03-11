@@ -3,6 +3,7 @@ package murt.cache
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import murt.data.model.ShoppingItem
 import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
 import javax.inject.Inject
@@ -33,7 +34,28 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
     override fun updateShoppingList(shoppingList: ShoppingList): Completable {
         return Completable
             .fromAction {
-                database.shoppingListDao().updateShoppingList(mapper.mapAppToCache(shoppingList))
+                database.shoppingListDao().updateShoppingList(
+                    mapper.mapAppToCache(shoppingList)
+                )
             }
+            .andThen(Completable.fromAction {
+                database.shoppingListDao().updateShoppingItems(
+                    mapper.mapAppToCache(shoppingList.items, shoppingList.id)
+                )
+            })
+    }
+
+    override fun createShoppingList(shoppingList: ShoppingList): Completable {
+        return Completable
+            .fromAction {
+                database.shoppingListDao().insertShoppingList(
+                    mapper.mapAppToCache(shoppingList)
+                )
+            }
+            .andThen(Completable.fromAction {
+                database.shoppingListDao().insertShoppingItems(
+                    mapper.mapAppToCache(shoppingList.items, shoppingList.id)
+                )
+            })
     }
 }

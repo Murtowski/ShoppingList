@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_shopping_list.*
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.MyActivity
-import murt.shoppinglistapp.ui.shoppingListCurrent.ShoppingListCurrentFragment
+import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment
 
 class MainActivity : MyActivity() {
@@ -38,7 +37,7 @@ class MainActivity : MyActivity() {
         var frag: Fragment? = supportFragmentManager.findFragmentByTag(fragmentType.name)
         if (frag == null) {
             frag = when (fragmentType) {
-                MainFragmentTag.SHOPPING_LIST -> ShoppingListCurrentFragment.newInstance()
+                MainFragmentTag.SHOPPING_LIST -> ShoppingListsCurrentFragment.newInstance()
                 MainFragmentTag.ARCHIVED_SHOPPING_LIST -> ShoppingListArchivedFragment.newInstance()
             }
         }

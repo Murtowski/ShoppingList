@@ -3,6 +3,7 @@ package murt.data.repository
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import murt.data.model.ShoppingItem
 import murt.data.model.ShoppingList
 
 /**
@@ -15,4 +16,6 @@ interface CacheService {
     fun getShoppingList(id: Long): Single<ShoppingList>
 
     fun updateShoppingList(shoppingList: ShoppingList): Completable
+
+    fun createShoppingList(shoppingList: ShoppingList): Completable
 }

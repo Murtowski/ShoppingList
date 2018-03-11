@@ -5,14 +5,16 @@ import org.threeten.bp.LocalDateTime
 /**
  * Piotr Murtowski on 20.02.2018.
  */
-data class ShoppingItem(
+open class ShoppingItem(
     val id: Long,
-    val title: String,
-    val createdAt: LocalDateTime){
+    var title: String,
+    var updatedAt: LocalDateTime){
 
     companion object {
         fun new() = ShoppingItem(1, "jakis tytul",
             LocalDateTime.of(2019,1,1,1,1,1))
+
+        fun empty() = ShoppingItem(-1L, "", LocalDateTime.now())
 
     }
 }

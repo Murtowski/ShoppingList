@@ -31,12 +31,29 @@
         <item name="android:textColor">@color/text_default</item>
     </style>
 
-    <style name="ShoppingListTitle" parent="TextLarge">
+    <style name="ShoppingListTitle" parent="TextMedium">
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ShoppingListItems" parent="TextMedium">
+        <item name="android:maxLines">4</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ShoppingItem" parent="TextMedium">
+        <item name="android:maxLines">2</item>
     </style>
 
 
     <!--END OF TEXT STYLES-->
+
+    <style name="ImageViewBackground">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:padding">8dp</item>
+    </style>
 
 
 </resources>

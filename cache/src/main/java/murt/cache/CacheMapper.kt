@@ -39,22 +39,20 @@ object CacheMapper {
         )
     }
 
-    fun mapAppToCache(shoppingList: ShoppingList): ShoppingListAndItems{
-        return ShoppingListAndItems(
-            shoppingList = ShoppingListCache(
-                shoppingList.id,
-                shoppingList.title,
-                shoppingList.updatedAt,
-                shoppingList.isArchived),
-            shoppingItems = mapAppToCache(shoppingList.items, shoppingList.id)
-        )
+    fun mapAppToCache(shoppingList: ShoppingList): ShoppingListCache  {
+        return ShoppingListCache(
+            shoppingList.id,
+            shoppingList.title,
+            shoppingList.updatedAt,
+            shoppingList.isArchived)
     }
+
 
     fun mapAppToCache(shoppingItem: ShoppingItem, shoppingListId: Long): ShoppingItemCache{
         return ShoppingItemCache(
             shoppingItem.id,
             shoppingListId,
-            shoppingItem.createdAt,
+            shoppingItem.updatedAt,
             shoppingItem.title
         )
     }

@@ -17,7 +17,10 @@ class ShoppingListDetailsViewModel @Inject constructor(
 
     }
 
-    fun getShoppingList(id: Long): LiveData<ShoppingList>?{
-        return null
+    fun refreshShoppingList(id: Long){
+
     }
+
+    val shoppingListLiveData : LiveData<ShoppingList>? = null
+
 }

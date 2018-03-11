@@ -8,30 +8,43 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tv_shopping_list_title"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_last_update_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Shopping List Title"
-        style="@style/ShoppingListTitle"
+        tools:text="12.12.2012 15:35"
+        style="@style/TextSmall"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_archive_24dp"
+        style="@style/ImageViewBackground"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
-    <LinearLayout
-        android:id="@+id/shopping_list_items_container"
+    <TextView
+        android:id="@+id/tv_shopping_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Shopping List Title, I may be Longer than you thought"
+        style="@style/ShoppingListTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/iv_archive_button"
+        app:layout_constraintTop_toBottomOf="@+id/tv_last_update_time"
+        />
+
+    <TextView
+        android:id="@+id/tv_shopping_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shopping_list_title"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp">
-
-        <!--This Text View is only for view preview purpose !!!-->
-        <TextView
-            android:id="@+id/fake_shopping_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Shoping iteml lol"
-            android:visibility="gone"
-            tools:visibility="visible"/>
-    </LinearLayout>
+        tools:text="3 Oranges, 10 Eggs, Ham, Bratwurst, Kanapki, 2 Pizza, Mehl, Nudeln, Parka w rochliku"
+        style="@style/ShoppingListItems"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shopping_title"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_shopping_title"
+        android:layout_marginLeft="8dp"
+        />
 
 </android.support.constraint.ConstraintLayout>

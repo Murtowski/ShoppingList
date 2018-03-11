@@ -1,4 +1,4 @@
-package murt.shoppinglistapp.ui.shoppingListCurrent
+package murt.shoppinglistapp.ui.shoppingListsCurrent
 
 import android.arch.lifecycle.ViewModel
 import murt.data.repository.CacheService

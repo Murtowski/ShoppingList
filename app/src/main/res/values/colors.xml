@@ -8,4 +8,5 @@
     <color name="text_error">#d82470</color>
 
     <color name="icon_default">#666666</color>
+    <color name="icon_navigation">@color/colorPrimary</color>
 </resources>

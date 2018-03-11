@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="murt.shoppinglistapp.ui.shoppingListCurrent.ShoppingListCurrentFragment"
+    tools:context="murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment"
     tools:showIn="@layout/activity_shopping_list_details"
     >
 

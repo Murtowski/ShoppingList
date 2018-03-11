@@ -1,4 +1,4 @@
-package murt.shoppinglistapp.ui.shoppingListCurrent
+package murt.shoppinglistapp.ui.shoppingListsCurrent
 
 
 import android.arch.lifecycle.ViewModelProviders
@@ -20,17 +20,17 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class ShoppingListCurrentFragment : MyFragment() {
+class ShoppingListsCurrentFragment : MyFragment() {
 
     companion object {
-        fun newInstance() = ShoppingListCurrentFragment()
+        fun newInstance() = ShoppingListsCurrentFragment()
     }
 
     @Inject
     lateinit var viewModelFactor: ShoppingListCurrentViewModelFactory
     lateinit var mViewModel: ShoppingListCurrentViewModel
 
-    private val mAdapter by lazy { ShoppingListCurrentAdapter() }
+    private val mAdapter by lazy { ListOfShoppingListsAdapter() }
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)

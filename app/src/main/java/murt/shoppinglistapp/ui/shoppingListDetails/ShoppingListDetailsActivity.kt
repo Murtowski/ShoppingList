@@ -31,11 +31,13 @@ class ShoppingListDetailsActivity : MyActivity() {
         }
     }
 
-    private val shoppingAdapter by lazy { ShoppingListDetailsAdapter(onDeleteClick = this::onDeleteClick) }
-
+    // Shopping List staff
+    private lateinit var shoppingAdapter: ShoppingListDetailsAdapter
     private var deletedItem: ShoppingItem ?= null
-    var shoppingListId: Long = -1L // -1 means that have to create new shopping list
+    private val shoppingList = mutableListOf<ShoppingItem>()
 
+
+    // View Model
     @Inject
     lateinit var mViewModelFactory: ShoppingListDetailsViewModelFactory
     private lateinit var mViewModel: ShoppingListDetailsViewModel
@@ -46,35 +48,44 @@ class ShoppingListDetailsActivity : MyActivity() {
         setContentView(R.layout.activity_shopping_list_details)
         setSupportActionBar(toolbar)
 
-        shoppingListId = intent.getLongExtra(EXTRA_SHOPPING_LIST_ID, -1L)
-
         setUpView()
         setUpViewModel()
+        observeViewModel()
 
     }
 
     private fun setUpView(){
         fab.setOnClickListener { view ->
-            shoppingAdapter.insertNewItem(ShoppingItem.new())
+            shoppingAdapter.insertNewItem()
         }
-
-        shopping_list_recycler_view.adapter = shoppingAdapter
     }
 
     private fun setUpViewModel(){
         mViewModel = ViewModelProviders.of(this, mViewModelFactory)
             .get(ShoppingListDetailsViewModel::class.java)
 
+        val shoppingListId = intent.getLongExtra(EXTRA_SHOPPING_LIST_ID, -1L)
         if(shoppingListId == -1L){
             mViewModel.createNewShoppingList()
         }else{
-            observeShoppingList(shoppingListId)
+            mViewModel.refreshShoppingList(shoppingListId)
         }
+
+
     }
 
-    private fun observeShoppingList(id: Long){
-        mViewModel.getShoppingList(id)?.observe(this, Observer {
+    private fun observeViewModel(){
+        mViewModel.shoppingListLiveData?.observe(this, Observer {
+            if(it == null || shoppingList.isNotEmpty()) return@Observer
 
+            shoppingList.addAll(it.items)
+
+            shoppingAdapter = ShoppingListDetailsAdapter(
+                items = shoppingList,
+                onDeleteClick = this::onDeleteClick,
+                isListEditable = !it.isArchived
+            )
+            shopping_list_recycler_view.adapter = shoppingAdapter
         })
     }
 
@@ -83,23 +94,6 @@ class ShoppingListDetailsActivity : MyActivity() {
         inflater.inflate(R.menu.shopping_list_menu, menu)
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            R.id.menu_item_edit_save -> {
-                toggleView()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun toggleView(){
-        // TODO handle toogle between VIEW and EDIT mode
-    }
-
-    // Adapter handling
 
     private fun onDeleteClick(item: ShoppingItem){
         deletedItem = item
@@ -116,7 +110,7 @@ class ShoppingListDetailsActivity : MyActivity() {
 
     private fun undoLastDeletedItem(snackBarActionButton: View){
         deletedItem?.let {
-            shoppingAdapter.insertNewItem(it)
+            shoppingAdapter.insertDeletedItem(it)
             deletedItem = null
         }
 
