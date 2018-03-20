@@ -3,6 +3,7 @@ package murt.shoppinglistapp.injection
 import android.app.Application
 import android.content.Context
 import android.content.res.Resources
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,17 +13,15 @@ import javax.inject.Singleton
  */
 
 @Module
-open class ContextModule {
+abstract class ContextModule {
 
-    @Singleton
-    @Provides
-    fun provideResources(application: Application): Resources {
-        return application.resources
-    }
+//    @Singleton
+//    @Provides
+//    fun provideResources(application: Application): Resources {
+//        return application.resources
+//    }
 
-    @Singleton
-    @Provides
-    fun provideContext(application: Application): Context{
-        return application
-    }
+//    @Singleton
+    @Binds
+    abstract fun provideContext(application: Application): Context
 }

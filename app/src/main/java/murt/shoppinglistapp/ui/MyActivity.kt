@@ -6,7 +6,7 @@ import dagger.android.support.DaggerAppCompatActivity
 /**
  * Piotr Murtowski on 20.02.2018.
  */
-abstract class MyActivity: AppCompatActivity()
+abstract class MyActivity: DaggerAppCompatActivity()
 {
 
 

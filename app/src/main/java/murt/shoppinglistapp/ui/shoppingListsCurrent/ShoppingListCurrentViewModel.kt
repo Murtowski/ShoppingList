@@ -15,10 +15,29 @@ class ShoppingListCurrentViewModel @Inject constructor(
     cacheService: CacheService
 ): ViewModel() {
 
+    private var hasDataBeenLoaded = false
 
-    fun refreshList(){
+    private val currentShoppingLists = MutableLiveData<List<ShoppingList>>()
 
+    fun getCurrentShoppingLists(): MutableLiveData<List<ShoppingList>>{
+        if(!hasDataBeenLoaded){
+            hasDataBeenLoaded = true
+            refreshList()
+        }
+        return currentShoppingLists
     }
 
-    val currentShoppingLists = MutableLiveData<List<ShoppingList>>()
+    fun refreshList(){
+        val listOfList = listOf(
+            ShoppingList.new(),
+            ShoppingList.new(),
+            ShoppingList.new(),
+            ShoppingList.new(),
+            ShoppingList.new()
+        )
+
+        currentShoppingLists.value = listOfList
+    }
+
+
 }

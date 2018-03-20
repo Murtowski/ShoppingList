@@ -19,11 +19,11 @@ import javax.inject.Singleton
     CacheModule::class,
     RemoteModule::class,
     BinderModule::class,
-//    AndroidInjectionModule::class,
     AndroidSupportInjectionModule::class // support v4.Fragment
 ])
 
 interface AppComponent: AndroidInjector<AndroidApplication> {
+
 
 
     @Component.Builder

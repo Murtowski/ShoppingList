@@ -12,7 +12,7 @@ open class ShoppingItem(
 
     companion object {
         fun new() = ShoppingItem(1, "jakis tytul",
-            LocalDateTime.of(2019,1,1,1,1,1))
+            LocalDateTime.now())
 
         fun empty() = ShoppingItem(-1L, "", LocalDateTime.now())
 

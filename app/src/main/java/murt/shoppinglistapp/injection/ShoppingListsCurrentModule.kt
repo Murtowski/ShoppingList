@@ -12,7 +12,7 @@ import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListCurrentViewModel
 open class ShoppingListsCurrentModule {
 
     @Provides
-    fun provideShoopinfListsCurretViewModelFactor(cache: CacheService):
+    fun provideShoopingListsCurrentViewModelFactor(cache: CacheService):
             ShoppingListCurrentViewModelFactory{
 
         return ShoppingListCurrentViewModelFactory(cache)

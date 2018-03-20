@@ -10,4 +10,6 @@ import dagger.android.support.DaggerFragment
  */
 abstract class MyFragment: DaggerFragment(){
 
+
+
 }

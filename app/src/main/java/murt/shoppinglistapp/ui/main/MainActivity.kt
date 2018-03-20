@@ -5,6 +5,7 @@ import android.os.PersistableBundle
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_shopping_list.*
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.MyActivity
@@ -26,9 +27,8 @@ class MainActivity : MyActivity() {
             false
         }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_list)
 
 
@@ -37,6 +37,7 @@ class MainActivity : MyActivity() {
 
         openFragment(MainFragmentTag.SHOPPING_LIST)
     }
+
 
     private fun openFragment(fragmentType: MainFragmentTag) {
         var frag: Fragment? = supportFragmentManager.findFragmentByTag(fragmentType.name)

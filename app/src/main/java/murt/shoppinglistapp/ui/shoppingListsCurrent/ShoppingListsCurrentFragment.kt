@@ -67,7 +67,7 @@ class ShoppingListsCurrentFragment : MyFragment() {
         mViewModel = ViewModelProviders.of(this, viewModelFactor)
             .get(ShoppingListCurrentViewModel::class.java)
 
-        mViewModel.currentShoppingLists.observe(this, Observer {
+        mViewModel.getCurrentShoppingLists().observe(this, Observer {
             if(it == null) return@Observer
 
             mAdapter.updateList(it)

@@ -3,8 +3,10 @@ package murt.shoppinglistapp.injection
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import murt.shoppinglistapp.injection.scopes.PerActivity
+import murt.shoppinglistapp.injection.scopes.PerFragment
 import murt.shoppinglistapp.ui.MyActivity
 import murt.shoppinglistapp.ui.MyFragment
+import murt.shoppinglistapp.ui.main.MainActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 
 /**
@@ -13,13 +15,13 @@ import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 @Module
 abstract class BinderModule {
 
-    @PerActivity
+    @PerFragment
     @ContributesAndroidInjector(modules = [ShoppingListsCurrentModule::class])
     abstract fun bindShoppingListCurrent(): ShoppingListsCurrentFragment
 
-//    @PerActivity
+    @PerActivity
     @ContributesAndroidInjector
-    abstract fun bindMainActivity(): MyActivity
+    abstract fun bindMainActivity(): MainActivity
 
 //    @ContributesAndroidInjector
 //    abstract fun contributesFragmentInjector(): MyFragment
