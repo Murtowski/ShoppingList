@@ -1,6 +1,7 @@
 package murt.shoppinglistapp.ui.main
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -25,12 +26,16 @@ class MainActivity : MyActivity() {
             false
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+
         setContentView(R.layout.activity_shopping_list)
 
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        supportFragmentManager.addOnBackStackChangedListener(this::onFragmentBackStackChanged)
+
+        openFragment(MainFragmentTag.SHOPPING_LIST)
     }
 
     private fun openFragment(fragmentType: MainFragmentTag) {
@@ -67,36 +72,6 @@ class MainActivity : MyActivity() {
             MainFragmentTag.ARCHIVED_SHOPPING_LIST.name -> {
                 setTite(stringResId = R.string.title_archived_shopping_list)
             }
-
-//            MENU_FRAGMENT -> {
-//                enableCollapsingToolbar(true)
-//                selectNavigationBarView(0)
-//                setDefaultLogo()
-//            }
-//            DOCUMENTS_FRAG -> {
-//                enableCollapsingToolbar(false)
-//                setTitle("Moje Wnioski")
-//                toggleBackButtonToolbar(false)
-//                selectNavigationBarView(1)
-//            }
-//            CAR_CONTRACT_FRAGMENT -> {
-//                enableCollapsingToolbar(false)
-//                setTitle(R.string.title_car_details)
-//                toggleBackButtonToolbar(false)
-//                selectNavigationBarView(2)
-//            }
-//            NOTIFICATIONS_FRAGMENT -> {
-//                enableCollapsingToolbar(false)
-//                setTitle(R.string.title_notifications)
-//                toggleBackButtonToolbar(false)
-//                selectNavigationBarView(3)
-//            }
-//            SETTINGS_FRAGMENT -> {
-//                enableCollapsingToolbar(false)
-//                setTitle(R.string.title_settings)
-//                toggleBackButtonToolbar(false)
-//                selectNavigationBarView(4)
-//            }
             else -> {
                 throw IllegalStateException("Cant handle this fragment, name: $currentlyDisplayedFragTag")
             }

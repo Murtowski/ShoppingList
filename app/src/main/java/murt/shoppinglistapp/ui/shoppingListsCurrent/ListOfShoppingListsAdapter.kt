@@ -1,5 +1,6 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +17,18 @@ import murt.shoppinglistapp.ui.utils.inflate
  * Piotr Murtowski on 26.02.2018.
  */
 class ListOfShoppingListsAdapter(
-    val items: MutableList<ShoppingList>,
     val onItemCLick: (ShoppingList) -> Unit,
     val onArchiveButtonClick: (ShoppingList) -> Unit
 ): RecyclerView.Adapter<ListOfShoppingListsAdapter.ShoppingListViewHolder>() {
+
+    var items = mutableListOf<ShoppingList>()
+
+    fun updateList(newShoppingLists: List<ShoppingList>){
+        val diffResult  = DiffUtil.calculateDiff(ShoppingListsDiffUtils(items, newShoppingLists))
+        items.clear()
+        items.addAll(newShoppingLists)
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         return ShoppingListViewHolder(parent.inflate(R.layout.item_shopping_list))
@@ -31,7 +40,7 @@ class ListOfShoppingListsAdapter(
         holder.onBind(items[position])
     }
 
-    class ShoppingListViewHolder(view: View): RecyclerView.ViewHolder(view){
+    inner class ShoppingListViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val date = view.tv_last_update_time
         private val archiveButton = view.iv_archive_button
         private val title = view.tv_shopping_title
@@ -44,13 +53,40 @@ class ListOfShoppingListsAdapter(
             else
                 date.gone()
 
-            
+            title.text = item.title
 
-//            title.text = item.shoppingItems.
+            itemsList.text = StringBuilder().apply {
+                val lastIndex = item.items.size - 1
+                item.items.forEachIndexed { index, shoppingItem ->
+                    append(shoppingItem.title)
+                    if(index != lastIndex)
+                        append(", ")
+                }
+            }.toString()
 
-
+            archiveButton.setOnClickListener {
+                onArchiveButtonClick(item)
+            }
 
         }
+
+    }
+
+    class ShoppingListsDiffUtils(
+        val oldList: List<ShoppingList>,
+        val newList: List<ShoppingList>
+    ): DiffUtil.Callback(){
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].title == newList[newItemPosition].title
+        }
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
 
     }
 }

@@ -86,15 +86,10 @@ dependencies {
     kapt depDagger.daggerCompiler
     annotationProcessor depDagger.daggerAndroidProcessor
     kapt depDagger.daggerAndroidProcessor
-
-//    String dagger = '2.11'
-//    implementation "com.google.dagger:dagger:${dagger}"
-//    implementation "com.google.dagger:dagger-android:${dagger}"
-//    implementation "com.google.dagger:dagger-android-support:${dagger}"
-//    annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
-//    annotationProcessor "com.google.dagger:dagger-android-processor:${dagger}"
-//    kapt "com.google.dagger:dagger-compiler:${dagger}"
-//    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
+}
+repositories {
+    mavenCentral()
 }

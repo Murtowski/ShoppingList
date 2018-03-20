@@ -19,4 +19,10 @@ open class ContextModule {
     fun provideResources(application: Application): Resources {
         return application.resources
     }
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context{
+        return application
+    }
 }

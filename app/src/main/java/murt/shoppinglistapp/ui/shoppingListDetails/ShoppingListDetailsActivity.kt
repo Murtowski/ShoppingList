@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.View
@@ -42,20 +43,19 @@ class ShoppingListDetailsActivity : MyActivity() {
     lateinit var mViewModelFactory: ShoppingListDetailsViewModelFactory
     private lateinit var mViewModel: ShoppingListDetailsViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+
         setContentView(R.layout.activity_shopping_list_details)
         setSupportActionBar(toolbar)
 
         setUpView()
         setUpViewModel()
         observeViewModel()
-
     }
 
     private fun setUpView(){
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             shoppingAdapter.insertNewItem()
         }
     }

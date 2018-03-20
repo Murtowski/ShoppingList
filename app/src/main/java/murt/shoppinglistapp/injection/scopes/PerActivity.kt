@@ -1,4 +1,4 @@
-package murt.shoppinglistapp.injection
+package murt.shoppinglistapp.injection.scopes
 
 import java.lang.annotation.Retention
 import javax.inject.Scope
@@ -8,4 +8,4 @@ import javax.inject.Scope
  */
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class PerApplication
+annotation class PerActivity

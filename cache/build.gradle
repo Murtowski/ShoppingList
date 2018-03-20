@@ -62,6 +62,10 @@ dependencies {
     implementation depAndroidArch.roomRxJava2
     annotationProcessor depAndroidArch.roomCompiler
     kapt depAndroidArch.roomCompiler
-    implementation depAndroidArch.roomPaging
+    api depAndroidArch.roomPaging
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

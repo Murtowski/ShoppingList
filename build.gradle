@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.30'
     repositories {
         google()
         jcenter()
@@ -106,7 +106,7 @@ ext {
 //    ]
 
 
-    String daggerV = '2.11'
+    String daggerV = '2.15'
 
     libDependencyInjection = [
             dagger:                 "com.google.dagger:dagger:$daggerV",

@@ -1,6 +1,10 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.arch.paging.PagedList
+import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
 import javax.inject.Inject
 
@@ -15,4 +19,6 @@ class ShoppingListCurrentViewModel @Inject constructor(
     fun refreshList(){
 
     }
+
+    val currentShoppingLists = MutableLiveData<List<ShoppingList>>()
 }
