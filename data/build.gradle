@@ -5,6 +5,7 @@ dependencies {
 
     def depPlatform = rootProject.ext.libPlatform
     api depPlatform.kotlinJre8
+    api depPlatform.kotlinJdk8
 
     def depRxJava = rootProject.ext.libRxJava2
     api depRxJava.rxKotlin
@@ -20,3 +21,4 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+

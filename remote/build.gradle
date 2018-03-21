@@ -4,6 +4,9 @@ apply plugin: 'kotlin'
 dependencies {
     api project(path: ':data')
 
+    def kotlin = rootProject.ext.libPlatform
+    api kotlin.kotlinJdk8
+
     def depNetwork = rootProject.ext.libNetwork
     implementation depNetwork.okHttp
     implementation depNetwork.okHttpInterceptor
@@ -20,8 +23,8 @@ dependencies {
     testImplementation depTest.assertj
     testImplementation depTest.mockito
 
-
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+

@@ -39,7 +39,7 @@ class ListOfShoppingListsAdapter(
         holder.onBind(item)
     }
 
-    inner class ShoppingListViewHolder(view: View): RecyclerView.ViewHolder(view){
+    inner class ShoppingListViewHolder(val view: View): RecyclerView.ViewHolder(view){
         private val date = view.tv_last_update_time
         private val archiveButton = view.iv_archive_button
         private val title = view.tv_shopping_title
@@ -65,6 +65,10 @@ class ListOfShoppingListsAdapter(
 
             archiveButton.setOnClickListener {
                 onArchiveButtonClick(item)
+            }
+
+            view.setOnClickListener{
+                onItemCLick(item)
             }
 
         }

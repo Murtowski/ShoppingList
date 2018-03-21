@@ -1,6 +1,7 @@
 package murt.shoppinglistapp.ui.main
 
 import android.os.Bundle
+import android.support.annotation.IntRange
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -11,10 +12,11 @@ import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment
 
 import android.support.design.widget.CoordinatorLayout
+import android.view.View
 import murt.shoppinglistapp.ui.BottomNavigationBehavior
 
 
-class MainActivity : MyActivity() {
+class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCurrentListener {
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -26,17 +28,16 @@ class MainActivity : MyActivity() {
                     openFragment(MainFragmentTag.ARCHIVED_SHOPPING_LIST)
                 }
             }
-            false
+            true
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        toolbar.setTitleTextAppearance(this, R.style.ToolbarTextAppearance)
 
         navigation_bar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-//        val layoutParams = navigation_bar.layoutParams as CoordinatorLayout.LayoutParams
-//        layoutParams.behavior = BottomNavigationBehavior()
 
         supportFragmentManager.addOnBackStackChangedListener(this::onFragmentBackStackChanged)
         openFragment(MainFragmentTag.SHOPPING_LIST)
@@ -83,8 +84,9 @@ class MainActivity : MyActivity() {
         }
     }
 
-
-
+    override fun showEmptyList(isListEmpty: Boolean) {
+        tv_empty_current_list_message.visibility = if(isListEmpty) View.VISIBLE else View.GONE
+    }
 }
 
 enum class MainFragmentTag{

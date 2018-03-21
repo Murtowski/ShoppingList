@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:titleTextAppearance="@style/ToolbarTextAppearance"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
@@ -41,7 +42,20 @@
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_navigation"
         app:layout_behavior="murt.shoppinglistapp.ui.BottomNavigationBehavior"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/bottom_navigation_color"
+        />
+
+    <!--android:background="?android:attr/windowBackground"-->
+
+    <TextView
+        android:id="@+id/tv_empty_current_list_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:fontFamily="casual"
+        android:text="Here you may add new shopping list"
+        app:layout_anchor="@id/fab_add_shopping_list"
+
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -54,8 +68,5 @@
         app:layout_anchorGravity="top|right"
         android:layout_gravity="top"
         />
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

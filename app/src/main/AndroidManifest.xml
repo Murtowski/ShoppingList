@@ -29,6 +29,10 @@
             android:name=".ui.test.LepiejUsun"
             android:label="@string/title_activity_lepiej_usun">
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts"/>
     </application>
 
 </manifest>

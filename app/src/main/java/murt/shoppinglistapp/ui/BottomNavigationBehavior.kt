@@ -41,24 +41,6 @@ class BottomNavigationBehavior : CoordinatorLayout.Behavior<BottomNavigationView
         }
     }
 
-    /*override fun layoutDependsOn(parent: CoordinatorLayout?, child: V, dependency: View?): Boolean {
-        if (dependency is Snackbar.SnackbarLayout) {
-            updateSnackbar(child, dependency)
-        }
-        return super.layoutDependsOn(parent, child, dependency)
-    }
-
-    private fun updateSnackbar(child: View, snackbarLayout: Snackbar.SnackbarLayout) {
-        if (snackbarLayout.layoutParams is CoordinatorLayout.LayoutParams) {
-            val params = snackbarLayout.layoutParams as CoordinatorLayout.LayoutParams
-
-            params.anchorId = child.id
-            params.anchorGravity = Gravity.TOP
-            params.gravity = Gravity.TOP
-            snackbarLayout.layoutParams = params
-        }
-    }*/
-
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
         child: BottomNavigationView,

@@ -51,7 +51,7 @@ class ShoppingListsCurrentFragment : MyFragment() {
         setUpViewModel()
     }
 
-    private fun setUpView(){
+    private fun setUpView() {
         srf_list_current.setOnRefreshListener {
             mViewModel.refreshList()
         }
@@ -63,22 +63,27 @@ class ShoppingListsCurrentFragment : MyFragment() {
 //        }
     }
 
-    private fun setUpViewModel(){
+    private fun setUpViewModel() {
         mViewModel = ViewModelProviders.of(this, viewModelFactor)
             .get(ShoppingListCurrentViewModel::class.java)
 
         mViewModel.getCurrentShoppingLists().observe(this, Observer {
-            if(it == null) return@Observer
+            if (it == null) return@Observer
 
             mAdapter.updateList(it)
+            (activity as ShoppingListsCurrentListener).showEmptyList(it.isEmpty())
         })
     }
 
-    private fun onShoppingListClick(shoppingList: ShoppingList){
+    private fun onShoppingListClick(shoppingList: ShoppingList) {
 
     }
 
-    private fun onArchiveShoppingListClick(shoppingList: ShoppingList){
+    private fun onArchiveShoppingListClick(shoppingList: ShoppingList) {
 
     }
-}// Required empty public constructor
+
+    interface ShoppingListsCurrentListener{
+        fun showEmptyList(isListEmpty: Boolean)
+    }
+}
