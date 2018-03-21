@@ -33,6 +33,8 @@ class ShoppingListCurrentViewModel @Inject constructor(
             ShoppingList.new(),
             ShoppingList.new(),
             ShoppingList.new(),
+            ShoppingList.new(),
+            ShoppingList.new(),
             ShoppingList.new()
         )
 

@@ -5,13 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment"
-    tools:showIn="@layout/activity_shopping_list_details"
-    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dawdahdakjbfkjbfkesbvksbrv"/>
+    >
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srf_list_current"
@@ -29,15 +24,6 @@
             />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_shopping_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_add_24"
-        />
 
 
 </android.support.constraint.ConstraintLayout>

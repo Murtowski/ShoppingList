@@ -31,6 +31,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 
     compileOptions {
@@ -86,7 +90,6 @@ dependencies {
     kapt depDagger.daggerCompiler
     annotationProcessor depDagger.daggerAndroidProcessor
     kapt depDagger.daggerAndroidProcessor
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
 }

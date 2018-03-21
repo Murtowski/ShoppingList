@@ -26,7 +26,7 @@ task clean(type: Delete) {
 
 ext {
     //Android
-    androidBuildToolsVersion = "27.0.0"
+    androidBuildToolsVersion = "27.0.3"
     androidMinSdkVersion = 17
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = androidTargetSdkVersion
@@ -37,7 +37,7 @@ ext {
             kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19.3"
     ]
 
-    String supportLibrary = '27.0.2'
+    String supportLibrary = '27.1.0'
     String supportConstrainLayout = '1.0.2'
 
     libSupport = [
@@ -53,7 +53,7 @@ ext {
     // Android Architecture
     String androidArch = '1.0.0'
     String androidArchExtension = '1.1.0'
-    String androidArchPaging = '1.0.0-alpha5'
+    String androidArchPaging = '1.0.0-alpha6'
 
     libArchitectureComponents = [
             // ViewModel, LiveData

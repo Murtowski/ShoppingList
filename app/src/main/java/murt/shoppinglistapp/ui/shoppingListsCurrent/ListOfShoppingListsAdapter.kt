@@ -1,5 +1,6 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
+import android.support.v7.recyclerview.extensions.AsyncListDiffer
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -21,23 +22,21 @@ class ListOfShoppingListsAdapter(
     val onArchiveButtonClick: (ShoppingList) -> Unit
 ): RecyclerView.Adapter<ListOfShoppingListsAdapter.ShoppingListViewHolder>() {
 
-    var items = mutableListOf<ShoppingList>()
+    private val mDiffer = AsyncListDiffer(this, ShoppingListsDiffUtils())
 
     fun updateList(newShoppingLists: List<ShoppingList>){
-        val diffResult  = DiffUtil.calculateDiff(ShoppingListsDiffUtils(items, newShoppingLists))
-        items.clear()
-        items.addAll(newShoppingLists)
-        diffResult.dispatchUpdatesTo(this)
+        mDiffer.submitList(newShoppingLists)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         return ShoppingListViewHolder(parent.inflate(R.layout.item_shopping_list))
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = mDiffer.currentList.size
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
-        holder.onBind(items[position])
+        val item = mDiffer.currentList[position]
+        holder.onBind(item)
     }
 
     inner class ShoppingListViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -72,21 +71,17 @@ class ListOfShoppingListsAdapter(
 
     }
 
-    class ShoppingListsDiffUtils(
-        val oldList: List<ShoppingList>,
-        val newList: List<ShoppingList>
-    ): DiffUtil.Callback(){
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
+    class ShoppingListsDiffUtils: DiffUtil.ItemCallback<ShoppingList>(){
+
+        override fun areItemsTheSame(oldItem: ShoppingList, newItem: ShoppingList): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].title == newList[newItemPosition].title
+        override fun areContentsTheSame(oldItem: ShoppingList, newItem: ShoppingList): Boolean {
+            return oldItem.title == newItem.title
         }
 
-        override fun getOldListSize() = oldList.size
 
-        override fun getNewListSize() = newList.size
 
     }
 }

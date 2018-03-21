@@ -1,16 +1,18 @@
 package murt.shoppinglistapp.ui.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.annotation.StringRes
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_shopping_list.*
+import kotlinx.android.synthetic.main.activity_main.*
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.MyActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment
+
+import android.support.design.widget.CoordinatorLayout
+import murt.shoppinglistapp.ui.BottomNavigationBehavior
+
 
 class MainActivity : MyActivity() {
 
@@ -29,12 +31,14 @@ class MainActivity : MyActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_list)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
+        navigation_bar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+//        val layoutParams = navigation_bar.layoutParams as CoordinatorLayout.LayoutParams
+//        layoutParams.behavior = BottomNavigationBehavior()
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         supportFragmentManager.addOnBackStackChangedListener(this::onFragmentBackStackChanged)
-
         openFragment(MainFragmentTag.SHOPPING_LIST)
     }
 

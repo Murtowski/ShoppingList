@@ -6,5 +6,9 @@
     <string name="title_shopping_list">Shopping List</string>
     <string name="title_archived_shopping_list">Archived Shopping List</string>
     <string name="save">Save</string>
+    <string name="title_activity_lepiej_usun">LepiejUsun</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

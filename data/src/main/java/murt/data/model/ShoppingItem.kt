@@ -11,7 +11,8 @@ open class ShoppingItem(
     var updatedAt: LocalDateTime){
 
     companion object {
-        fun new() = ShoppingItem(1, "jakis tytul",
+        fun new() = ShoppingItem(1, "3 Oranges, 10 Eggs, Ham, Bratwurst," +
+                " Kanapki, 2 Pizza, Mehl, Nudeln, Parka w rochliku",
             LocalDateTime.now())
 
         fun empty() = ShoppingItem(-1L, "", LocalDateTime.now())

@@ -58,9 +58,9 @@ class ShoppingListsCurrentFragment : MyFragment() {
 
         rv_list_current.adapter = mAdapter
 
-        fab_add_shopping_list.setOnClickListener {
-            ShoppingListDetailsActivity.openShoppingListDetails(context!!, -1L)
-        }
+//        fab_add_shopping_list.setOnClickListener {
+//            ShoppingListDetailsActivity.openShoppingListDetails(context!!, -1L)
+//        }
     }
 
     private fun setUpViewModel(){
