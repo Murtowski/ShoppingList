@@ -14,6 +14,9 @@ import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragmen
 import android.support.design.widget.CoordinatorLayout
 import android.view.View
 import murt.shoppinglistapp.ui.BottomNavigationBehavior
+import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
+import murt.shoppinglistapp.ui.utils.gone
+import murt.shoppinglistapp.ui.utils.visible
 
 
 class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCurrentListener {
@@ -40,11 +43,15 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
         navigation_bar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         supportFragmentManager.addOnBackStackChangedListener(this::onFragmentBackStackChanged)
-        openFragment(MainFragmentTag.SHOPPING_LIST)
+        openFragment(MainFragmentTag.SHOPPING_LIST, false)
+
+        fab_add_shopping_list.setOnClickListener {
+            ShoppingListDetailsActivity.openShoppingListDetails(this, -1L)
+        }
     }
 
 
-    private fun openFragment(fragmentType: MainFragmentTag) {
+    private fun openFragment(fragmentType: MainFragmentTag, withAnimation: Boolean = true) {
         var frag: Fragment? = supportFragmentManager.findFragmentByTag(fragmentType.name)
         if (frag == null) {
             frag = when (fragmentType) {
@@ -54,8 +61,12 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
         }
 
         if (!frag.isVisible) {
-            supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.show_translate, R.anim.hide_translate)
+            val transaction = supportFragmentManager.beginTransaction()
+
+            if(withAnimation)
+                transaction.setCustomAnimations(R.anim.show_translate, R.anim.hide_translate)
+
+            transaction
                 .replace(R.id.fragment_container, frag, fragmentType.name)
                 .addToBackStack(fragmentType.name)
                 .commit()
@@ -74,13 +85,23 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
         when (currentlyDisplayedFragTag) {
             MainFragmentTag.SHOPPING_LIST.name ->{
                 setTite(stringResId = R.string.title_shopping_list)
+                showFabButton(true)
             }
             MainFragmentTag.ARCHIVED_SHOPPING_LIST.name -> {
                 setTite(stringResId = R.string.title_archived_shopping_list)
+                showFabButton(false)
             }
             else -> {
                 throw IllegalStateException("Cant handle this fragment, name: $currentlyDisplayedFragTag")
             }
+        }
+    }
+
+    private fun showFabButton(show: Boolean){
+        if(show){
+            fab_button_container.visible()
+        }else{
+            fab_button_container.gone()
         }
     }
 

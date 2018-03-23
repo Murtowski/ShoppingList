@@ -9,10 +9,7 @@ import kotlinx.android.synthetic.main.item_shopping_list.view.*
 import murt.cache.model.ShoppingListAndItems
 import murt.data.model.ShoppingList
 import murt.shoppinglistapp.R
-import murt.shoppinglistapp.ui.utils.SystemTools
-import murt.shoppinglistapp.ui.utils.getReadableDate
-import murt.shoppinglistapp.ui.utils.gone
-import murt.shoppinglistapp.ui.utils.inflate
+import murt.shoppinglistapp.ui.utils.*
 
 /**
  * Piotr Murtowski on 26.02.2018.
@@ -47,9 +44,10 @@ class ListOfShoppingListsAdapter(
 
         fun onBind(item: ShoppingList) {
             // Only for debug to know when values are updated
-            if(SystemTools.isDebugMode)
+            if(SystemTools.isDebugMode) {
+                date.visible()
                 date.text = item.updatedAt.getReadableDate(date.context)
-            else
+            }else
                 date.gone()
 
             title.text = item.title

@@ -14,7 +14,7 @@ import org.threeten.bp.LocalDateTime
 class ShoppingListCache(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_PARENT_ID)
-    var id: Long = -1L,
+    var id: Long? = null,
     var title: String = "",
     @TypeConverters(LocalDateTimeConverter::class)
     var updatedAt: LocalDateTime = LocalDateTime.now(),
@@ -28,6 +28,6 @@ class ShoppingListCache(
         const val COLUMN_IS_ARCHIVED = "isArchived"
 
 
-        fun emptyInstance() = ShoppingListCache(-1L, "", LocalDateTime.now(), true)
+        fun emptyInstance() = ShoppingListCache(null, "", LocalDateTime.now(), true)
     }
 }

@@ -1,5 +1,7 @@
 package murt.shoppinglistapp.ui.shoppingListDetails
 
+import android.content.Context
+import android.support.v7.recyclerview.extensions.AsyncListDiffer
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
@@ -7,8 +9,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import io.reactivex.Flowable
-import io.reactivex.FlowableOnSubscribe
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.disposables.CompositeDisposable
@@ -16,6 +16,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.item_shopping.view.*
 import murt.data.model.ShoppingItem
+import murt.data.model.ShoppingList
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.utils.*
 import org.threeten.bp.LocalDateTime
@@ -30,28 +31,37 @@ import java.util.concurrent.TimeUnit
  * @param viewMode - decide whenever user may edit items
  * */
 class ShoppingListDetailsAdapter(
-    val items: MutableList<ShoppingItem>,
+    val context: Context,
+    val items: MutableList<ShoppingItem> = mutableListOf(),
     val isListEditable: Boolean = false,
-    val onDeleteClick: (ShoppingItem) -> Unit
+    val onDeleteClick: (ShoppingItem) -> Unit,
+    val saveItem: (ShoppingItem) -> Unit
 ): RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
 
     var editedItemPosition: Int = -1
     val mTextWatcher = EditableItemTextWatcher()
 
-    fun insertDeletedItem(item: ShoppingItem){
-        // create new list
-        val newList = mutableListOf<ShoppingItem>()
-        newList.addAll(items)
-        newList.add(item)
-
-        val diffResult = DiffUtil.calculateDiff(MyDiffUtils(items, newList))
-        items.add(item)
-        diffResult.dispatchUpdatesTo(this)
+    fun insertItem(shoppingItem: ShoppingItem){
+        editedItemPosition = 0
+        items.add(0,shoppingItem)
+        notifyItemInserted(0)
     }
 
-    fun insertNewItem(){
-        items.add(ShoppingItem.empty())
-        notifyItemInserted(0)
+    fun updateList(newShoppingLists: List<ShoppingItem>){
+        items.clear()
+        items.addAll(newShoppingLists)
+        notifyDataSetChanged()
+
+    }
+
+    fun savePreviousEdit(){
+        if(editedItemPosition != -1){
+            val savePosition = editedItemPosition
+            val item = items[editedItemPosition]
+            editedItemPosition = -1
+            saveItem(item)
+            notifyItemChanged(savePosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingItemViewHolder {
@@ -62,7 +72,7 @@ class ShoppingListDetailsAdapter(
 
     override fun onBindViewHolder(holder: ShoppingItemViewHolder, position: Int) {
         val isEditable = (isListEditable && position == editedItemPosition)
-        holder.onBindEdit(items[position], isEditable)
+        holder.onBindEdit(items[position], isEditable, position)
     }
 
     inner class ShoppingItemViewHolder(val view: View): RecyclerView.ViewHolder(view){
@@ -71,20 +81,21 @@ class ShoppingListDetailsAdapter(
         private val inputWrapper = view.item_shopping_input_wrapper
         private val input = view.item_shopping_input
 
-        fun onBindEdit(item: ShoppingItem, isEditable: Boolean){
-            if(SystemTools.isDebugMode)
+        fun onBindEdit(item: ShoppingItem, editMode: Boolean, position: Int){
+            if(SystemTools.isDebugMode) {
+                date.visible()
                 date.text = item.updatedAt.getReadableDate(date.context)
-            else
+            }else
                 date.gone()
 
-            if(isEditable){
+            if(editMode){
                 // View in EDIT mode
                 inputWrapper.visible()
                 title.gone()
                 input.setText(item.title)
                 mTextWatcher.shoppingItem = item
                 input.addTextChangedListener(mTextWatcher)
-
+                input.requestFocus()
             }else{
                 // View in VIEW mode
                 title.visible()
@@ -94,6 +105,7 @@ class ShoppingListDetailsAdapter(
 
             view.setOnClickListener {
                 if(isListEditable){
+                    savePreviousEdit()
                     // List is editable and no item is edited
                     editedItemPosition = adapterPosition
                     notifyItemChanged(editedItemPosition)
@@ -105,14 +117,15 @@ class ShoppingListDetailsAdapter(
 
     }
 
-    protected val disposable = CompositeDisposable()
-
     inner class EditableItemTextWatcher: TextWatcher{
+
+        private val disposable = CompositeDisposable()
+
         init {
             Observable.create<String> { obsEmitter ->
                 emitter = obsEmitter
             }
-                .debounce(1000, TimeUnit.MILLISECONDS)
+                .debounce(100, TimeUnit.MILLISECONDS)
                 .subscribeBy(onNext = {
                     shoppingItem.title = it
                     shoppingItem.updatedAt = LocalDateTime.now()
@@ -129,28 +142,20 @@ class ShoppingListDetailsAdapter(
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        fun dispose(){
+            disposable.dispose()
+        }
     }
 
+    class ShoppingItemListsDiffUtils: DiffUtil.ItemCallback<ShoppingItem>(){
 
-
-
-
-
-    class MyDiffUtils(
-        val oldList: List<ShoppingItem>,
-        val newList: List<ShoppingItem>
-    ): DiffUtil.Callback(){
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        override fun areContentsTheSame(oldItem: ShoppingItem?, newItem: ShoppingItem?): Boolean {
+            return oldItem?.id == newItem?.id
         }
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].title == newList[newItemPosition].title
+        override fun areItemsTheSame(oldItem: ShoppingItem?, newItem: ShoppingItem?): Boolean {
+            return oldItem?.title == newItem?.title
         }
-
-        override fun getOldListSize() = oldList.size
-
-        override fun getNewListSize() = newList.size
-
     }
 }

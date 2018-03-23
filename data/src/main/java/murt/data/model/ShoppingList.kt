@@ -7,8 +7,8 @@ import java.util.*
  * Piotr Murtowski on 20.02.2018.
  */
 data class ShoppingList(
-    var id: Long,
-    val updatedAt: LocalDateTime,
+    var id: Long?,
+    var updatedAt: LocalDateTime,
     var title: String,
     var items: List<ShoppingItem>,
     var isArchived: Boolean
@@ -23,8 +23,14 @@ data class ShoppingList(
                 ShoppingItem.new()
             )
 
-            return ShoppingList(-1, LocalDateTime.now(), "Some title", shoppingItems,
+            return ShoppingList(null, LocalDateTime.now(), "Some title", shoppingItems,
                 Random().nextBoolean())
         }
+
+        fun empty(): ShoppingList{
+            return ShoppingList(null, LocalDateTime.now(), "", emptyList(), false)
+        }
+
+
     }
 }

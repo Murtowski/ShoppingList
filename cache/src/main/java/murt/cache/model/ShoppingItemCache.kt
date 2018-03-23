@@ -13,7 +13,7 @@ import org.threeten.bp.LocalDateTime
 @Entity(tableName = ShoppingItemCache.TABLE_NAME)
 class ShoppingItemCache(
     @PrimaryKey(autoGenerate = true)
-    var id: Long = -1L,
+    var id: Long ?= null,
     @ColumnInfo(name = ENTITY_COLUMN)
     var shoppingListId: Long = -1,
     @TypeConverters(LocalDateTimeConverter::class)

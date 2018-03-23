@@ -30,7 +30,7 @@ object SystemTools {
         get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
 
     @JvmStatic val isDebugMode: Boolean
-        get() = BuildConfig.DEBUG
+        get() = !BuildConfig.RELEASE
 
     @JvmStatic val getApplicationTypeInfo: String
         get() = BuildConfig.FLAVOR + " " + BuildConfig.VERSION_NAME + " " + if(isDebugMode) "debug" else "release"

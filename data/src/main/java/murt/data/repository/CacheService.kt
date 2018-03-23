@@ -17,5 +17,13 @@ interface CacheService {
 
     fun updateShoppingList(shoppingList: ShoppingList): Completable
 
-    fun createShoppingList(shoppingList: ShoppingList): Completable
+    fun updateShoppingListTitle(shoppingList: ShoppingList): Completable
+
+    fun createShoppingList(shoppingList: ShoppingList): Single<ShoppingList>
+
+    fun updateShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long): Completable
+
+    fun createShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long): Single<ShoppingItem>
+
+    fun deleteShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long): Completable
 }

@@ -29,10 +29,12 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField 'Boolean', 'RELEASE', 'true'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
+            buildConfigField 'Boolean', 'RELEASE', 'false'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

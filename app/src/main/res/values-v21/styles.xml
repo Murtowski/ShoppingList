@@ -5,4 +5,8 @@
         <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:padding">8dp</item>
     </style>
+
+    <style name="ShoppingItem.Edit">
+        <item name="android:colorAccent">@color/colorPrimaryDark</item>
+    </style>
 </resources>

@@ -18,7 +18,31 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            >
+
+            <TextView
+                android:id="@+id/toolbar_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ToolbarTextAppearance"
+                tools:text="@tools:sample/lorem"
+                />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/toolbar_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/ToolbarTextAppearance"
+                android:visibility="gone"
+                android:hint="@string/name_of_your_shopping_list"
+                android:inputType="textCapWords"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:maxLength="30"
+                />
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -28,16 +52,31 @@
         android:layout_height="match_parent"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_shopping"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
+    <TextView
+        android:id="@+id/tv_empty_current_list_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        style="@style/TextHint"
+        android:text="@string/here_you_may_add_your_shopping_item"
+        app:layout_anchor="@id/fab_add_shopping_item"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_add_shopping_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_edit"
+        app:useCompatPadding="true"
+        app:srcCompat="@drawable/ic_add_24"
+        android:visibility="gone"
+        tools:visibility="visible"
         />
 
 </android.support.design.widget.CoordinatorLayout>

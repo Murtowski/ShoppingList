@@ -1,9 +1,7 @@
 package murt.cache.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import android.arch.persistence.room.*
+import io.reactivex.Completable
 import murt.cache.model.ShoppingItemCache
 import murt.cache.model.ShoppingListAndItems
 import murt.cache.model.ShoppingListCache
@@ -23,14 +21,26 @@ interface ShoppingListDao {
     fun getShoppingList(id: Long): ShoppingListAndItems
 
     @Update()
-    fun updateShoppingList(shoppingListAndItems: ShoppingListCache)
+    fun updateShoppingList(shoppingList: ShoppingListCache)
 
     @Update
     fun updateShoppingItems(shoppingItemsList: List<ShoppingItemCache>)
 
     @Insert()
-    fun insertShoppingList(shoppingListCache: ShoppingListCache)
+    fun insertShoppingList(shoppingListCache: ShoppingListCache): Long
 
     @Insert
-    fun insertShoppingItems(shoppingItemsList: List<ShoppingItemCache>)
+    fun insertShoppingItems(shoppingItemsList: List<ShoppingItemCache>): List<Long>
+
+    /**
+     * Shopping items
+     * */
+    @Update
+    fun updateShoppingItem(shoppingItemCache: ShoppingItemCache)
+
+    @Insert
+    fun insertShoppingItem(shoppingItemCache: ShoppingItemCache): Long
+
+    @Delete
+    fun deleteShoppingItem(shoppingItemCache: ShoppingItemCache)
 }

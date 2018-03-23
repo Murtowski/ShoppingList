@@ -47,11 +47,21 @@
         <item name="android:maxLines">2</item>
     </style>
 
+    <style name="ShoppingItem.Edit">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="ToolbarTextAppearance" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/days_one</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="TextHint" parent="android:TextAppearance">
+        <item name="android:fontFamily">casual</item>
+    </style>
+
+
 
 
     <!--END OF TEXT STYLES-->

@@ -7,6 +7,7 @@ import murt.shoppinglistapp.injection.scopes.PerFragment
 import murt.shoppinglistapp.ui.MyActivity
 import murt.shoppinglistapp.ui.MyFragment
 import murt.shoppinglistapp.ui.main.MainActivity
+import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 
 /**
@@ -22,6 +23,10 @@ abstract class BinderModule {
     @PerActivity
     @ContributesAndroidInjector
     abstract fun bindMainActivity(): MainActivity
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = [ShoppingDetailsModule::class])
+    abstract fun bindDetailsActivity(): ShoppingListDetailsActivity
 
 //    @ContributesAndroidInjector
 //    abstract fun contributesFragmentInjector(): MyFragment

@@ -23,11 +23,8 @@
         <activity
             android:name=".ui.shoppingListDetails.ShoppingListDetailsActivity"
             android:label="@string/title_shopping_list_details"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".ui.test.LepiejUsun"
-            android:label="@string/title_activity_lepiej_usun">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ui.main.MainActivity">
         </activity>
 
         <meta-data

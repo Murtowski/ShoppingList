@@ -10,5 +10,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="here_you_may_add_new_shopping_list">Click below to create new shopping list</string>
+    <string name="here_you_may_add_your_shopping_item">Click below to create shopping item</string>
+    <string name="name_of_your_shopping_list">Name of your shopping list</string>
+    <string name="write_your_shopping_item">Write here your shopping item</string>
+    <string name="empty_item">Empty item</string>
+    <string name="empty_title">Empty Title</string>
 
 </resources>
