@@ -21,6 +21,7 @@ import murt.shoppinglistapp.ui.utils.invisible
 import murt.shoppinglistapp.ui.utils.visible
 import javax.inject.Inject
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
@@ -29,10 +30,11 @@ import io.reactivex.ObservableEmitter
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
+import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import java.util.concurrent.TimeUnit
 
 
-class ShoppingListDetailsActivity : MyActivity() {
+class ShoppingListDetailsActivity : MyActivity(), RecyclerViewSwipeHelper.RecyclerViewSwipeListener {
 
     companion object {
         private const val EXTRA_SHOPPING_LIST_ID = "shoppingListID"
@@ -51,13 +53,12 @@ class ShoppingListDetailsActivity : MyActivity() {
     private val shoppingAdapter: ShoppingListDetailsAdapter by lazy {
         ShoppingListDetailsAdapter(
             context = this,
-            onDeleteClick = this::onDeleteClick,
             isListEditable = isEditable,
             saveItem = this::onUpdateClick
         )
     }
 
-    private var deletedItem: ShoppingItem ?= null
+    private var deletedItem: Pair<ShoppingItem, Int> ?= null
     protected var shoppingList: ShoppingList ?= null
 
     private lateinit var titleTextWatcher: TitleTextWatcher
@@ -87,13 +88,6 @@ class ShoppingListDetailsActivity : MyActivity() {
         super.onStop()
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.shopping_details_menu, menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         when (item.itemId) {
@@ -107,11 +101,20 @@ class ShoppingListDetailsActivity : MyActivity() {
     }
 
     private fun setUpView(){
+
+        // Recycler View
         shopping_list_recycler_view.adapter = shoppingAdapter
         val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         shopping_list_recycler_view.addItemDecoration(itemDecor)
 
+        val itemHelper = RecyclerViewSwipeHelper(this)
+
+        ItemTouchHelper(itemHelper).attachToRecyclerView(shopping_list_recycler_view)
+
+        titleTextWatcher = TitleTextWatcher()
+
         if(isEditable){
+            // enable adding new items
             fab_add_shopping_item.show()
             fab_add_shopping_item.setOnClickListener {
                 shoppingAdapter.savePreviousEdit()
@@ -119,6 +122,7 @@ class ShoppingListDetailsActivity : MyActivity() {
                 showEmptyListIndicator(false)
             }
 
+            // enable editing Title
             toolbar_textview.setOnClickListener {
                 showEditableShoppingListTitle(true)
             }
@@ -127,8 +131,13 @@ class ShoppingListDetailsActivity : MyActivity() {
                 UITools.hideSoftKeyboard(this, toolbar_edittext)
             })
 
-            titleTextWatcher = TitleTextWatcher()
             toolbar_edittext.addTextChangedListener(titleTextWatcher)
+
+            // enable Save Button
+            toolbar_save.setOnClickListener {
+                shoppingAdapter.savePreviousEdit()
+                NavUtils.navigateUpFromSameTask(this)
+            }
         }else{
 
         }
@@ -194,8 +203,6 @@ class ShoppingListDetailsActivity : MyActivity() {
 
     }
 
-
-
     private fun onUpdateClick(item: ShoppingItem){
         mViewModel.updateShoppingItem(item, shoppingList!!.id!!)
         mViewModel.updateShoppingListTitle(shoppingList!!)
@@ -204,14 +211,17 @@ class ShoppingListDetailsActivity : MyActivity() {
     /**
      * Undo delete
      * */
-    private fun onDeleteClick(item: ShoppingItem){
-        deletedItem = item
+    override fun onSwiped(
+        viewHolder: RecyclerViewSwipeHelper.ViewHolderSwipe, direction: Int, position: Int) {
+        deletedItem = Pair(shoppingAdapter.items[position], position)
+        shoppingAdapter.removeItem(position)
+        mViewModel.deleteShoppingItem(deletedItem!!.first, shoppingList!!.id!!)
         showSnackBarDeletedItem()
     }
 
     private fun showSnackBarDeletedItem(){
         Snackbar
-            .make(cl_shopping_list, R.string.item_deleted, Snackbar.LENGTH_LONG)
+            .make(cl_shopping_list, R.string.shopping_item_deleted, Snackbar.LENGTH_LONG)
             .setAction(R.string.undo, this::undoLastDeletedItem)
             .show()
     }
@@ -219,7 +229,7 @@ class ShoppingListDetailsActivity : MyActivity() {
     private fun undoLastDeletedItem(snackBarActionButton: View){
         deletedItem?.let {
             shoppingAdapter.savePreviousEdit()
-            mViewModel.createShoppingItem(it, shoppingList!!.id!!)
+            mViewModel.createShoppingItem(it.first, shoppingList!!.id!!)
             deletedItem = null
         }
 

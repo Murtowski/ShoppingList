@@ -11,13 +11,15 @@ import murt.data.model.ShoppingList
  */
 interface CacheService {
 
-    fun getListOfShoppingList(isArchived: Boolean): Flowable<List<ShoppingList>>
+    fun getAllShoppingList(isArchived: Boolean): Flowable<List<ShoppingList>>
 
     fun getShoppingList(id: Long): Single<ShoppingList>
 
-    fun updateShoppingList(shoppingList: ShoppingList): Completable
+    fun updateShoppingListAndItems(shoppingList: ShoppingList): Completable
 
-    fun updateShoppingListTitle(shoppingList: ShoppingList): Completable
+    fun updateShoppingListDescription(shoppingList: ShoppingList): Completable
+
+    fun deleteShoppingList(shoppingList: ShoppingList): Completable
 
     fun createShoppingList(shoppingList: ShoppingList): Single<ShoppingList>
 

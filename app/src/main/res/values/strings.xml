@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ShoppingList</string>
     <string name="undo">Undo</string>
-    <string name="item_deleted">Item deleted</string>
+    <string name="shopping_item_deleted">Item deleted</string>
     <string name="title_shopping_list_details">Shopping Details</string>
     <string name="title_shopping_list">Shopping List</string>
     <string name="title_archived_shopping_list">Archived Shopping List</string>
@@ -14,7 +14,8 @@
     <string name="here_you_may_add_your_shopping_item">Click below to create shopping item</string>
     <string name="name_of_your_shopping_list">Name of your shopping list</string>
     <string name="write_your_shopping_item">Write here your shopping item</string>
-    <string name="empty_item">Empty item</string>
+    <string name="empty_items">No Items ;(</string>
     <string name="empty_title">Empty Title</string>
+    <string name="shopping_list_deleted">Shopping List deleted</string>
 
 </resources>

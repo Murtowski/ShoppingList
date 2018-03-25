@@ -3,19 +3,19 @@ package murt.shoppinglistapp.ui.shoppingListsCurrent
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_shopping_list_current.*
 import murt.data.model.ShoppingList
 
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.MyFragment
+import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class ShoppingListsCurrentFragment : MyFragment() {
+class ShoppingListsCurrentFragment : MyFragment(), RecyclerViewSwipeHelper.RecyclerViewSwipeListener {
 
     companion object {
         fun newInstance() = ShoppingListsCurrentFragment()
@@ -31,7 +31,9 @@ class ShoppingListsCurrentFragment : MyFragment() {
 
     @Inject
     lateinit var viewModelFactor: ShoppingListCurrentViewModelFactory
-    lateinit var mViewModel: ShoppingListCurrentViewModel
+    private lateinit var mViewModel: ShoppingListCurrentViewModel
+
+    private var deletedShoppingList: ShoppingList ?= null
 
     private val mAdapter by lazy {
         ListOfShoppingListsAdapter(this::onShoppingListClick, this::onArchiveShoppingListClick)
@@ -59,9 +61,9 @@ class ShoppingListsCurrentFragment : MyFragment() {
 
         rv_list_current.adapter = mAdapter
 
-//        fab_add_shopping_list.setOnClickListener {
-//            ShoppingListDetailsActivity.openShoppingListDetails(context!!, -1L)
-//        }
+        val swipeHelper = RecyclerViewSwipeHelper(this)
+        ItemTouchHelper(swipeHelper).attachToRecyclerView(rv_list_current)
+
     }
 
     private fun setUpViewModel() {
@@ -69,20 +71,51 @@ class ShoppingListsCurrentFragment : MyFragment() {
             .get(ShoppingListCurrentViewModel::class.java)
 
         mViewModel.getCurrentShoppingLists().observe(this, Observer {
+            srf_list_current.isRefreshing = false
+
             if (it == null) return@Observer
 
             mAdapter.updateList(it)
+            // show / hide empty list indicator
             (activity as ShoppingListsCurrentListener).showEmptyList(it.isEmpty())
         })
     }
 
-    private fun onShoppingListClick(shoppingList: ShoppingList) {
+    override fun onSwiped(viewHolder: RecyclerViewSwipeHelper.ViewHolderSwipe, direction: Int, position: Int) {
+        val shoppingList = mAdapter.getShoppingList(position)
+        deletedShoppingList = shoppingList
+        mViewModel.deleteShoppingList(shoppingList)
+        showSnackBarDeletedItem()
+    }
 
+    private fun showSnackBarDeletedItem(){
+        Snackbar
+            .make(activity!!.findViewById(R.id.main_activity_container), R.string.shopping_list_deleted,
+                Snackbar.LENGTH_LONG)
+            .setAction(R.string.undo, this::undoLastDeletedItem)
+            .show()
+    }
+
+    private fun undoLastDeletedItem(snackBarActionButton: View){
+        deletedShoppingList?.let {
+            mViewModel.restoreShoppingList(it)
+            deletedShoppingList = null
+        }
+
+    }
+
+    private fun onShoppingListClick(shoppingList: ShoppingList) {
+        ShoppingListDetailsActivity.openShoppingListDetails(context!!, shoppingList.id!!, true)
     }
 
     private fun onArchiveShoppingListClick(shoppingList: ShoppingList) {
-
+        mViewModel.moveToArchive(shoppingList)
     }
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    fun onMessageEvent(event: ShoppingListUnarchived) {
+//        mViewModel.refreshList()
+//    }
 
     interface ShoppingListsCurrentListener{
         fun showEmptyList(isListEmpty: Boolean)

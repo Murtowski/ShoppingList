@@ -1,14 +1,15 @@
 package murt.shoppinglistapp.ui.shoppingListDetails
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import murt.data.model.ShoppingItem
 import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
+import murt.shoppinglistapp.ui.MyViewModel
 import org.threeten.bp.LocalDateTime
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
  */
 class ShoppingListDetailsViewModel @Inject constructor(
     private val cacheService: CacheService
-): ViewModel() {
+): MyViewModel() {
 
     /**
      * Shopping List
@@ -44,12 +45,12 @@ class ShoppingListDetailsViewModel @Inject constructor(
                 shoppingListLiveData.value = it
             }, onError = {
                 Timber.e(it, "Cannot Get Shopping list for ID:$id")
-            })
+            }).addTo(disposable)
     }
 
     fun updateShoppingListTitle(shoppingList: ShoppingList){
         shoppingList.updatedAt = LocalDateTime.now()
-        cacheService.updateShoppingList(shoppingList)
+        cacheService.updateShoppingListAndItems(shoppingList)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onComplete = {

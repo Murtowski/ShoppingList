@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt' // creates the necessary self-generated classes for 
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    def apkVersionNumber = "0.0.1"
+    def apkVersionNumber = "0.0.2"
     def apkName = "ShoppingList"
     def project = rootProject.ext
 
@@ -92,6 +92,7 @@ dependencies {
     kapt depDagger.daggerCompiler
     annotationProcessor depDagger.daggerAndroidProcessor
     kapt depDagger.daggerAndroidProcessor
+
 
 
 }

@@ -8,6 +8,7 @@ import murt.shoppinglistapp.ui.MyActivity
 import murt.shoppinglistapp.ui.MyFragment
 import murt.shoppinglistapp.ui.main.MainActivity
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
+import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 
 /**
@@ -19,6 +20,10 @@ abstract class BinderModule {
     @PerFragment
     @ContributesAndroidInjector(modules = [ShoppingListsCurrentModule::class])
     abstract fun bindShoppingListCurrent(): ShoppingListsCurrentFragment
+
+    @PerFragment
+    @ContributesAndroidInjector(modules = [ShoppingListArchivedModule::class])
+    abstract fun bindShoppingListArchived(): ShoppingListArchivedFragment
 
     @PerActivity
     @ContributesAndroidInjector

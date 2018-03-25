@@ -47,8 +47,26 @@
         <item name="android:maxLines">2</item>
     </style>
 
-    <style name="ShoppingItem.Edit">
+    <style name="ShoppingItem.Edit" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextInputLabelError" parent="TextSmall">
+        <item name="android:textColor">@color/text_error</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextInputLabelTheme" parent="Widget.Design.TextInputLayout">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <!-- Color of descriptiontext -->
         <item name="colorAccent">@color/colorPrimaryDark</item>
+        <!--Color of the bottom line - when NOT focused-->
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <!--Color of the label and bottom line when focused-->
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="errorEnabled">false</item>
+        <item name="errorTextAppearance">@style/TextInputLabelError</item>
     </style>
 
     <style name="ToolbarTextAppearance" parent="android:TextAppearance">

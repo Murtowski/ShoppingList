@@ -15,7 +15,7 @@ import murt.cache.typeConverter.LocalDateTimeConverter
 @Database(entities = [
     ShoppingItemCache::class,
     ShoppingListCache::class
-], version = 2)
+], version = 3)
 
 @TypeConverters(
     LocalDateTimeConverter::class

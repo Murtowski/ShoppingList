@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_shopping_list.view.*
 import murt.cache.model.ShoppingListAndItems
 import murt.data.model.ShoppingList
 import murt.shoppinglistapp.R
+import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.utils.*
 
 /**
@@ -20,6 +21,10 @@ class ListOfShoppingListsAdapter(
 ): RecyclerView.Adapter<ListOfShoppingListsAdapter.ShoppingListViewHolder>() {
 
     private val mDiffer = AsyncListDiffer(this, ShoppingListsDiffUtils())
+
+    fun getShoppingList(position: Int): ShoppingList{
+        return mDiffer.currentList[position]
+    }
 
     fun updateList(newShoppingLists: List<ShoppingList>){
         mDiffer.submitList(newShoppingLists)
@@ -36,13 +41,19 @@ class ListOfShoppingListsAdapter(
         holder.onBind(item)
     }
 
-    inner class ShoppingListViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    inner class ShoppingListViewHolder(val view: View): RecyclerView.ViewHolder(view),
+        RecyclerViewSwipeHelper.ViewHolderSwipe{
+
+        override val foreground = view.shopping_list_foreground
         private val date = view.tv_last_update_time
         private val archiveButton = view.iv_archive_button
         private val title = view.tv_shopping_title
         private val itemsList = view.tv_shopping_list
 
         fun onBind(item: ShoppingList) {
+            if(item.isArchived){
+                archiveButton.setImageResource(R.drawable.ic_unarchive_24dp)
+            }
             // Only for debug to know when values are updated
             if(SystemTools.isDebugMode) {
                 date.visible()

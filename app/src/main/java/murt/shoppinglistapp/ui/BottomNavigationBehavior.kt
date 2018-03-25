@@ -1,16 +1,15 @@
 package murt.shoppinglistapp.ui
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
-
+import murt.shoppinglistapp.R
 
 
 /**
@@ -26,6 +25,10 @@ class BottomNavigationBehavior : CoordinatorLayout.Behavior<BottomNavigationView
                                  dependency: View): Boolean {
         if (dependency is Snackbar.SnackbarLayout) {
             updateSnackbar(child, dependency)
+//            val fabButtonLayout = parent.findViewById<ConstraintLayout>(R.id.fab_button_container)
+//            if(fabButtonLayout != null){
+//                updateFabButton(fabButtonLayout, dependency)
+//            }
         }
         return super.layoutDependsOn(parent, child, dependency)
     }
@@ -40,6 +43,16 @@ class BottomNavigationBehavior : CoordinatorLayout.Behavior<BottomNavigationView
             snackbarLayout.layoutParams = params
         }
     }
+//
+//    private fun updateFabButton(fabBtnLayout: ConstraintLayout, snackbarLayout: Snackbar.SnackbarLayout){
+//        val params = fabBtnLayout.layoutParams as CoordinatorLayout.LayoutParams
+//
+//        params.anchorId = snackbarLayout.id
+//        params.anchorGravity = Gravity.TOP
+//        fabBtnLayout.layoutParams = params
+//    }
+
+
 
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,

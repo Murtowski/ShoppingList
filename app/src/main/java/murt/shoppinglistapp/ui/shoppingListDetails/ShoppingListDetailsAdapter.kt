@@ -1,7 +1,6 @@
 package murt.shoppinglistapp.ui.shoppingListDetails
 
 import android.content.Context
-import android.support.v7.recyclerview.extensions.AsyncListDiffer
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
@@ -16,8 +15,8 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.item_shopping.view.*
 import murt.data.model.ShoppingItem
-import murt.data.model.ShoppingList
 import murt.shoppinglistapp.R
+import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.utils.*
 import org.threeten.bp.LocalDateTime
 import java.util.concurrent.TimeUnit
@@ -34,7 +33,7 @@ class ShoppingListDetailsAdapter(
     val context: Context,
     val items: MutableList<ShoppingItem> = mutableListOf(),
     val isListEditable: Boolean = false,
-    val onDeleteClick: (ShoppingItem) -> Unit,
+//    val onDeleteClick: (ShoppingItem) -> Unit,
     val saveItem: (ShoppingItem) -> Unit
 ): RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
 
@@ -52,6 +51,11 @@ class ShoppingListDetailsAdapter(
         items.addAll(newShoppingLists)
         notifyDataSetChanged()
 
+    }
+
+    fun removeItem(position: Int){
+        items.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     fun savePreviousEdit(){
@@ -75,7 +79,10 @@ class ShoppingListDetailsAdapter(
         holder.onBindEdit(items[position], isEditable, position)
     }
 
-    inner class ShoppingItemViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    inner class ShoppingItemViewHolder(val view: View): RecyclerView.ViewHolder(view),
+        RecyclerViewSwipeHelper.ViewHolderSwipe {
+        override val foreground = view.shopping_item_foreground_wrapper
+
         private val date = view.item_shopping_date
         private val title = view.item_shopping_title
         private val inputWrapper = view.item_shopping_input_wrapper

@@ -21,26 +21,50 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             >
 
-            <TextView
-                android:id="@+id/toolbar_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/ToolbarTextAppearance"
-                tools:text="@tools:sample/lorem"
-                />
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/toolbar_edittext"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/ToolbarTextAppearance"
-                android:visibility="gone"
-                android:hint="@string/name_of_your_shopping_list"
-                android:inputType="textCapWords"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:maxLength="30"
-                />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/toolbar_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_save"
+                    android:layout_alignParentRight="true"
+                    style="@style/ImageViewBackground"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/toolbar_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ToolbarTextAppearance"
+                    tools:text="@tools:sample/lorem"
+                    android:hint="@string/empty_title"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/toolbar_save"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/toolbar_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ToolbarTextAppearance"
+                    android:visibility="gone"
+                    android:hint="@string/name_of_your_shopping_list"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/toolbar_save"
+                    android:layout_alignParentLeft="true"
+                    />
+
+            </RelativeLayout>
+
+
 
         </android.support.v7.widget.Toolbar>
 

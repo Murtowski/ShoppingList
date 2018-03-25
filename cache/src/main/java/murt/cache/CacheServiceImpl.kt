@@ -15,12 +15,16 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
 
     val mapper = CacheMapper
 
-    override fun getListOfShoppingList(isArchived: Boolean): Flowable<List<ShoppingList>> {
-        return Flowable.defer {
-            Flowable.just(database.shoppingListDao().getListOfShoppingList(isArchived))
-        }.map {
-            mapper.mapCacheToApp1(it)
-        }
+    /**
+     * Shopping List
+     *
+     * */
+
+    override fun getAllShoppingList(isArchived: Boolean): Flowable<List<ShoppingList>> {
+        return database.shoppingListDao().getListOfShoppingList(isArchived)
+            .map {
+                mapper.mapCacheToApp1(it)
+            }
     }
 
     override fun getShoppingList(id: Long): Single<ShoppingList> {
@@ -31,7 +35,7 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
         }
     }
 
-    override fun updateShoppingList(shoppingList: ShoppingList): Completable {
+    override fun updateShoppingListAndItems(shoppingList: ShoppingList): Completable {
         return Completable
             .fromAction {
                 database.shoppingListDao().updateShoppingList(
@@ -45,7 +49,7 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
             })
     }
 
-    override fun updateShoppingListTitle(shoppingList: ShoppingList): Completable {
+    override fun updateShoppingListDescription(shoppingList: ShoppingList): Completable {
         return Completable
             .fromAction {
                 database.shoppingListDao().updateShoppingList(
@@ -87,6 +91,23 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
                 shoppingList
             }
     }
+
+    override fun deleteShoppingList(shoppingList: ShoppingList): Completable {
+        return Completable.fromAction {
+            database.shoppingListDao().deleteShoppingList(
+                mapper.mapAppToCache(shoppingList)
+            )
+        }.andThen(Completable.fromAction {
+            database.shoppingListDao().deleteShoppingItems(
+                mapper.mapAppToCache(shoppingList.items, shoppingList.id!!)
+            )
+        })
+
+    }
+
+    /**
+     * Shopping Item
+     * */
 
     override fun updateShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long): Completable {
         return Single.just(shoppingItem)

@@ -47,6 +47,12 @@ object CacheMapper {
             shoppingList.isArchived)
     }
 
+    fun mapAppToShoppingListAndItemsCache(shoppingList: ShoppingList): ShoppingListAndItems{
+        val shoppingListCache = mapAppToCache(shoppingList)
+        val shoppingItemsCache = mapAppToCache(shoppingList.items, shoppingList.id!!)
+        return ShoppingListAndItems(shoppingListCache, shoppingItemsCache)
+    }
+
 
     fun mapAppToCache(shoppingItem: ShoppingItem, shoppingListId: Long): ShoppingItemCache{
         return ShoppingItemCache(

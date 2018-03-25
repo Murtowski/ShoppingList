@@ -64,7 +64,7 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
             val transaction = supportFragmentManager.beginTransaction()
 
             if(withAnimation)
-                transaction.setCustomAnimations(R.anim.show_translate, R.anim.hide_translate)
+                transaction.setCustomAnimations(R.anim.show_alpha, R.anim.hide_alpha)
 
             transaction
                 .replace(R.id.fragment_container, frag, fragmentType.name)

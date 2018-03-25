@@ -11,15 +11,15 @@ import org.threeten.bp.LocalDateTime
  * Piotr Murtowski on 22.02.2018.
  */
 @Entity(tableName = ShoppingListCache.TABLE_NAME)
-class ShoppingListCache(
+data class ShoppingListCache(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_PARENT_ID)
-    var id: Long? = null,
-    var title: String = "",
+    val id: Long?,
+    val title: String,
     @TypeConverters(LocalDateTimeConverter::class)
-    var updatedAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime ,
     @ColumnInfo(name = COLUMN_IS_ARCHIVED)
-    var isArchived: Boolean = false
+    val isArchived: Boolean
 ) {
 
     companion object {

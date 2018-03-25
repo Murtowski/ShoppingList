@@ -9,9 +9,11 @@
     <color name="text_error">#d82470</color>
 
     <color name="icon_default">#666666</color>
+    <color name="icon_dark">@color/colorPrimaryDark</color>
     <color name="icon_navigation">@color/colorPrimary</color>
 
     <color name="bottom_navigation_color">#f2ecf6</color>
 
     <color name="white">#FFF</color>
+    <color name="red">#FF0000</color>
 </resources>

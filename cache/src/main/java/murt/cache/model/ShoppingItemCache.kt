@@ -11,14 +11,14 @@ import org.threeten.bp.LocalDateTime
  * Piotr Murtowski on 20.02.2018.
  */
 @Entity(tableName = ShoppingItemCache.TABLE_NAME)
-class ShoppingItemCache(
+data class ShoppingItemCache constructor(
     @PrimaryKey(autoGenerate = true)
-    var id: Long ?= null,
+    val id: Long ?,
     @ColumnInfo(name = ENTITY_COLUMN)
-    var shoppingListId: Long = -1,
+    val shoppingListId: Long ,
     @TypeConverters(LocalDateTimeConverter::class)
-    var createdAt: LocalDateTime = LocalDateTime.now(),
-    var title: String = ""){
+    val createdAt: LocalDateTime ,
+    val title: String ){
 
     companion object {
         const val ENTITY_COLUMN = "shoppingListId"

@@ -11,59 +11,65 @@
     android:layout_marginBottom="8dp"
     >
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    tools:background="@color/white"
-    >
+    <include
+        layout="@layout/item_delete_background"/>
 
-
-    <TextView
-        android:id="@+id/tv_last_update_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="12.12.2012 15:35"
-        style="@style/TextSmall"
-        android:visibility="gone"
-        tools:visibility="visible"/>
-
-    <ImageView
-        android:id="@+id/iv_archive_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@drawable/ic_archive_24dp"
-        style="@style/ImageViewBackground"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/tv_shopping_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="Shopping List Title, I may be Longer than you thought"
-        android:hint="@string/empty_title"
-        style="@style/ShoppingListTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/iv_archive_button"
-        app:layout_constraintTop_toBottomOf="@+id/tv_last_update_time"
-        />
-
-    <TextView
-        android:id="@+id/tv_shopping_list"
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/shopping_list_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="3 Oranges, 10 Eggs, Ham, Bratwurst, Kanapki, 2 Pizza, Mehl, Nudeln, Parka w rochliku"
-        android:hint="@string/empty_item"
-        style="@style/ShoppingListItems"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shopping_title"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_shopping_title"
-        android:layout_marginLeft="8dp"
-        />
+        android:padding="16dp"
+        android:background="@color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        >
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_archive_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_archive_24dp"
+            style="@style/ImageViewBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_last_update_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="12.12.2012 15:35"
+            style="@style/TextSmall"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/iv_archive_button"/>
+
+        <TextView
+            android:id="@+id/tv_shopping_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Shopping List Title, I may be Longer than you thought"
+            android:hint="@string/empty_title"
+            style="@style/ShoppingListTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/iv_archive_button"
+            app:layout_constraintTop_toBottomOf="@+id/tv_last_update_time"
+            />
+
+        <TextView
+            android:id="@+id/tv_shopping_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="3 Oranges, 10 Eggs, Ham, Bratwurst, Kanapki, 2 Pizza, Mehl, Nudeln, Parka w rochliku"
+            android:hint="@string/empty_items"
+            style="@style/ShoppingListItems"
+            app:layout_constraintTop_toBottomOf="@+id/tv_shopping_title"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_shopping_title"
+            android:layout_marginLeft="8dp"
+            />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

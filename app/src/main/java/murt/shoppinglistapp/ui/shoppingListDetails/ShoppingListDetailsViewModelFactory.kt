@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import murt.data.repository.CacheService
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 /**
  * Piotr Murtowski on 21.02.2018.
  */

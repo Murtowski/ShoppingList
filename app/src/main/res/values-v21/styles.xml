@@ -6,7 +6,11 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="ShoppingItem.Edit">
-        <item name="android:colorAccent">@color/colorPrimaryDark</item>
-    </style>
+    <!--<style name="ShoppingItem.Edit" parent="TextAppearance.AppCompat">-->
+        <!--<item name="android:textColorHint">@color/colorPrimaryDark</item>-->
+        <!--<item name="android:colorAccent">@color/colorPrimaryDark</item>-->
+        <!--<item name="android:textColor">@color/colorPrimaryDark</item>-->
+        <!--<item name="android:colorControlNormal">@color/colorPrimaryDark</item>-->
+        <!--<item name="android:colorControlActivated">@color/colorPrimaryDark</item>-->
+    <!--</style>-->
 </resources>
