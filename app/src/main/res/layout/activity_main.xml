@@ -55,6 +55,14 @@
         >
 
         <TextView
+            android:id="@+id/usun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/fab_add_shopping_list"
+            tools:text="awdadawdadawdawdaw"
+            />
+
+        <TextView
             android:id="@+id/tv_empty_current_list_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

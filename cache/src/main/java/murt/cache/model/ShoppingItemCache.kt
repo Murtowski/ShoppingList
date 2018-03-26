@@ -5,7 +5,9 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.TypeConverters
 import murt.cache.typeConverter.LocalDateTimeConverter
+import murt.cache.typeConverter.ZonedDateTimeConverter
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 
 /**
  * Piotr Murtowski on 20.02.2018.
@@ -16,8 +18,8 @@ data class ShoppingItemCache constructor(
     val id: Long ?,
     @ColumnInfo(name = ENTITY_COLUMN)
     val shoppingListId: Long ,
-    @TypeConverters(LocalDateTimeConverter::class)
-    val createdAt: LocalDateTime ,
+    @TypeConverters(ZonedDateTimeConverter::class)
+    val createdAt: ZonedDateTime ,
     val title: String ){
 
     companion object {

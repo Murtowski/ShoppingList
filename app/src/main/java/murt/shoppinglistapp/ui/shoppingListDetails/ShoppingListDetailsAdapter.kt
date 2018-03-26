@@ -19,6 +19,7 @@ import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.utils.*
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 import java.util.concurrent.TimeUnit
 
 
@@ -135,7 +136,7 @@ class ShoppingListDetailsAdapter(
                 .debounce(100, TimeUnit.MILLISECONDS)
                 .subscribeBy(onNext = {
                     shoppingItem.title = it
-                    shoppingItem.updatedAt = LocalDateTime.now()
+                    shoppingItem.updatedAt = ZonedDateTime.now()
                 }).addTo(disposable)
         }
 

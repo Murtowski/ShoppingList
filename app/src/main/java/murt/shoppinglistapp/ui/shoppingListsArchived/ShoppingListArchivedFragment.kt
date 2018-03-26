@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_shopping_list_archived.*
 import murt.data.model.ShoppingList
 
 import murt.shoppinglistapp.R
-import murt.shoppinglistapp.events.ShoppingListArchived
 import murt.shoppinglistapp.ui.MyFragment
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ListOfShoppingListsAdapter

@@ -11,6 +11,7 @@ import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
 import murt.shoppinglistapp.ui.MyViewModel
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -49,7 +50,7 @@ class ShoppingListDetailsViewModel @Inject constructor(
     }
 
     fun updateShoppingListTitle(shoppingList: ShoppingList){
-        shoppingList.updatedAt = LocalDateTime.now()
+        shoppingList.updatedAt = ZonedDateTime.now()
         cacheService.updateShoppingListAndItems(shoppingList)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -65,7 +66,7 @@ class ShoppingListDetailsViewModel @Inject constructor(
      * */
 
     fun createShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long){
-        shoppingItem.updatedAt = LocalDateTime.now()
+        shoppingItem.updatedAt = ZonedDateTime.now()
         cacheService.createShoppingItem(shoppingItem, shoppingListId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -78,7 +79,7 @@ class ShoppingListDetailsViewModel @Inject constructor(
     }
 
     fun updateShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long){
-        shoppingItem.updatedAt = LocalDateTime.now()
+        shoppingItem.updatedAt = ZonedDateTime.now()
         cacheService.updateShoppingItem(shoppingItem, shoppingListId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

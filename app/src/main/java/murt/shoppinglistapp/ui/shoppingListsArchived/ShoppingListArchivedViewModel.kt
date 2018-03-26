@@ -9,7 +9,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
-import murt.shoppinglistapp.events.ShoppingListUnarchived
 import murt.shoppinglistapp.ui.MyViewModel
 import timber.log.Timber
 import javax.inject.Inject

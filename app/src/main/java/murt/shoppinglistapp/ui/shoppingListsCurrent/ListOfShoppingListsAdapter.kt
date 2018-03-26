@@ -11,6 +11,7 @@ import murt.data.model.ShoppingList
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.utils.*
+import org.threeten.bp.temporal.ChronoUnit
 
 /**
  * Piotr Murtowski on 26.02.2018.
@@ -91,7 +92,7 @@ class ListOfShoppingListsAdapter(
         }
 
         override fun areContentsTheSame(oldItem: ShoppingList, newItem: ShoppingList): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.updatedAt.truncatedTo(ChronoUnit.SECONDS) == newItem.updatedAt.truncatedTo(ChronoUnit.SECONDS)
         }
 
 

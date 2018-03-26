@@ -13,10 +13,15 @@ import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragmen
 
 import android.support.design.widget.CoordinatorLayout
 import android.view.View
+import murt.cache.typeConverter.LocalDateTimeConverter
 import murt.shoppinglistapp.ui.BottomNavigationBehavior
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
+import murt.shoppinglistapp.ui.utils.getReadableDate
+import murt.shoppinglistapp.ui.utils.getZonedDateTime
 import murt.shoppinglistapp.ui.utils.gone
 import murt.shoppinglistapp.ui.utils.visible
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 
 
 class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCurrentListener {
@@ -48,6 +53,7 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
         fab_add_shopping_list.setOnClickListener {
             ShoppingListDetailsActivity.openShoppingListDetails(this, -1L)
         }
+
     }
 
 

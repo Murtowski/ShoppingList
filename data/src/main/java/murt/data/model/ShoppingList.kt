@@ -1,6 +1,7 @@
 package murt.data.model
 
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 import java.util.*
 
 /**
@@ -8,7 +9,7 @@ import java.util.*
  */
 data class ShoppingList(
     var id: Long?,
-    var updatedAt: LocalDateTime,
+    var updatedAt: ZonedDateTime,
     var title: String,
     var items: List<ShoppingItem>,
     var isArchived: Boolean
@@ -23,12 +24,12 @@ data class ShoppingList(
                 ShoppingItem.new()
             )
 
-            return ShoppingList(null, LocalDateTime.now(), "Some title", shoppingItems,
+            return ShoppingList(null, ZonedDateTime.now(), "Some title", shoppingItems,
                 Random().nextBoolean())
         }
 
         fun empty(): ShoppingList{
-            return ShoppingList(null, LocalDateTime.now(), "", emptyList(), false)
+            return ShoppingList(null, ZonedDateTime.now(), "", emptyList(), false)
         }
 
 
