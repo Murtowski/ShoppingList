@@ -63,7 +63,7 @@ dependencies {
     annotationProcessor depAndroidArch.roomCompiler
     kapt depAndroidArch.roomCompiler
     api depAndroidArch.roomPaging
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 
 }
 repositories {

@@ -2,13 +2,13 @@
 apply plugin: 'kotlin'
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.3.0'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
     }
@@ -24,19 +24,17 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "27.0.3"
+    androidBuildToolsVersion = "28.0.3"
     androidMinSdkVersion = 17
-    androidTargetSdkVersion = 27
+    androidTargetSdkVersion = 28
     androidCompileSdkVersion = androidTargetSdkVersion
 
     libPlatform = [
             multidex: "com.android.support:multidex:1.0.2",
-            kotlinJre8: "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
-            kotlinJdk8: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19.3"
     ]
 
-    String supportLibrary = '27.1.0'
+    String supportLibrary = '28.0.0'
     String supportConstrainLayout = '1.0.2'
 
     libSupport = [
@@ -139,9 +137,9 @@ ext {
 repositories {
     mavenCentral()
 }
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-}
+//dependencies {
+//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+//}
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"

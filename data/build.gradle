@@ -4,8 +4,8 @@ apply plugin: 'kotlin'
 dependencies {
 
     def depPlatform = rootProject.ext.libPlatform
-    api depPlatform.kotlinJre8
-    api depPlatform.kotlinJdk8
+    //api depPlatform.kotlinJre8
+//    api depPlatform.kotlinJdk8
 
     def depRxJava = rootProject.ext.libRxJava2
     api depRxJava.rxKotlin
@@ -19,6 +19,6 @@ dependencies {
     api depOthers.timber
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
