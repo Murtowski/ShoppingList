@@ -10,7 +10,7 @@
     <include
         layout="@layout/item_delete_background"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,7 +35,7 @@
             android:hint="@string/empty_items"
             />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/item_shopping_input_wrapper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 tools:text="Some text"
                 style="@style/ShoppingItem.Edit"
                 />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/item_shopping_title"
@@ -70,6 +70,6 @@
             tools:visibility="visible"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

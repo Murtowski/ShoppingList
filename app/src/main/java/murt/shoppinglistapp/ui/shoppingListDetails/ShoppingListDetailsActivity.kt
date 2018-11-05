@@ -1,12 +1,12 @@
 package murt.shoppinglistapp.ui.shoppingListDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.NavUtils
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.app.NavUtils
 import android.view.Menu
 import android.view.View
 import murt.shoppinglistapp.R
@@ -20,8 +20,8 @@ import murt.shoppinglistapp.ui.utils.createKeyboardActionListener
 import murt.shoppinglistapp.ui.utils.invisible
 import murt.shoppinglistapp.ui.utils.visible
 import javax.inject.Inject
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
@@ -104,7 +104,7 @@ class ShoppingListDetailsActivity : MyActivity(), RecyclerViewSwipeHelper.Recycl
 
         // Recycler View
         shopping_list_recycler_view.adapter = shoppingAdapter
-        val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val itemDecor = DividerItemDecoration(this, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
         shopping_list_recycler_view.addItemDecoration(itemDecor)
 
         val itemHelper = RecyclerViewSwipeHelper(this)
@@ -220,8 +220,8 @@ class ShoppingListDetailsActivity : MyActivity(), RecyclerViewSwipeHelper.Recycl
     }
 
     private fun showSnackBarDeletedItem(){
-        Snackbar
-            .make(cl_shopping_list, R.string.shopping_item_deleted, Snackbar.LENGTH_LONG)
+        com.google.android.material.snackbar.Snackbar
+            .make(cl_shopping_list, R.string.shopping_item_deleted, com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
             .setAction(R.string.undo, this::undoLastDeletedItem)
             .show()
     }

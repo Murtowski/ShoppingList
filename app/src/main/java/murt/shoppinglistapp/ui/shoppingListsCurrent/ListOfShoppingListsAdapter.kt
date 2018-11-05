@@ -1,8 +1,8 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
-import android.support.v7.recyclerview.extensions.AsyncListDiffer
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_shopping_list.view.*
@@ -19,7 +19,7 @@ import org.threeten.bp.temporal.ChronoUnit
 class ListOfShoppingListsAdapter(
     val onItemCLick: (ShoppingList) -> Unit,
     val onArchiveButtonClick: (ShoppingList) -> Unit
-): RecyclerView.Adapter<ListOfShoppingListsAdapter.ShoppingListViewHolder>() {
+): androidx.recyclerview.widget.RecyclerView.Adapter<ListOfShoppingListsAdapter.ShoppingListViewHolder>() {
 
     private val mDiffer = AsyncListDiffer(this, ShoppingListsDiffUtils())
 
@@ -42,7 +42,7 @@ class ListOfShoppingListsAdapter(
         holder.onBind(item)
     }
 
-    inner class ShoppingListViewHolder(val view: View): RecyclerView.ViewHolder(view),
+    inner class ShoppingListViewHolder(val view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view),
         RecyclerViewSwipeHelper.ViewHolderSwipe{
 
         override val foreground = view.shopping_list_foreground

@@ -1,6 +1,6 @@
 package murt.cache
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 
 /**

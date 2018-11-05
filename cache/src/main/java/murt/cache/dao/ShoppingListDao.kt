@@ -1,6 +1,6 @@
 package murt.cache.dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import murt.cache.model.ShoppingItemCache

@@ -1,6 +1,6 @@
 package murt.shoppinglistapp.ui
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import dagger.android.support.DaggerAppCompatActivity
 
 /**

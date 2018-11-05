@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
-import android.support.annotation.DrawableRes
-import android.support.annotation.LayoutRes
-import android.support.graphics.drawable.VectorDrawableCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import androidx.core.content.res.ResourcesCompat
 import android.text.InputFilter
 import android.view.KeyEvent
 import android.view.LayoutInflater

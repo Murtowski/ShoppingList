@@ -1,25 +1,22 @@
 package murt.shoppinglistapp.ui.main
 
 import android.os.Bundle
-import android.support.annotation.IntRange
-import android.support.annotation.StringRes
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import androidx.annotation.IntRange
+import androidx.annotation.StringRes
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.MyActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment
 
-import android.support.design.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import android.view.View
 import murt.cache.typeConverter.LocalDateTimeConverter
 import murt.shoppinglistapp.ui.BottomNavigationBehavior
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
-import murt.shoppinglistapp.ui.utils.getReadableDate
-import murt.shoppinglistapp.ui.utils.getZonedDateTime
-import murt.shoppinglistapp.ui.utils.gone
-import murt.shoppinglistapp.ui.utils.visible
+import murt.shoppinglistapp.ui.utils.*
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZonedDateTime
 
@@ -27,7 +24,7 @@ import org.threeten.bp.ZonedDateTime
 class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCurrentListener {
 
     private val mOnNavigationItemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_current -> {
                     openFragment(MainFragmentTag.SHOPPING_LIST)
@@ -58,7 +55,7 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
 
 
     private fun openFragment(fragmentType: MainFragmentTag, withAnimation: Boolean = true) {
-        var frag: Fragment? = supportFragmentManager.findFragmentByTag(fragmentType.name)
+        var frag: androidx.fragment.app.Fragment? = supportFragmentManager.findFragmentByTag(fragmentType.name)
         if (frag == null) {
             frag = when (fragmentType) {
                 MainFragmentTag.SHOPPING_LIST -> ShoppingListsCurrentFragment.newInstance()
@@ -86,6 +83,12 @@ class MainActivity : MyActivity(), ShoppingListsCurrentFragment.ShoppingListsCur
     private fun onFragmentBackStackChanged() {
         val fm = supportFragmentManager
         val lastItemIndex = fm.backStackEntryCount - 1
+
+        if(lastItemIndex < 0){
+            finish()
+            return
+        }
+
         val currentlyDisplayedFragTag = fm.getBackStackEntryAt(lastItemIndex).name
 
         when (currentlyDisplayedFragTag) {

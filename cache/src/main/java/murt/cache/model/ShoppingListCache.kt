@@ -1,9 +1,9 @@
 package murt.cache.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.TypeConverters
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import murt.cache.typeConverter.LocalDateTimeConverter
 import murt.cache.typeConverter.ZonedDateTimeConverter
 import org.threeten.bp.LocalDateTime

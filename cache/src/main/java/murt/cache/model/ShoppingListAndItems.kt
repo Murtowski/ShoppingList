@@ -1,6 +1,6 @@
 package murt.cache.model
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 /**
  * Piotr Murtowski on 20.02.2018.

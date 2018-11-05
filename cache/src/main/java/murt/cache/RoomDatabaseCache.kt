@@ -1,8 +1,8 @@
 package murt.cache
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import murt.cache.dao.ShoppingListDao
 import murt.cache.model.ShoppingItemCache
 import murt.cache.model.ShoppingListAndItems

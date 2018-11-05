@@ -1,7 +1,7 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import murt.data.repository.CacheService
 import javax.inject.Inject
 

@@ -1,12 +1,12 @@
 package murt.shoppinglistapp.ui.shoppingListsCurrent
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.helper.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,9 +89,9 @@ class ShoppingListsCurrentFragment : MyFragment(), RecyclerViewSwipeHelper.Recyc
     }
 
     private fun showSnackBarDeletedItem(){
-        Snackbar
+        com.google.android.material.snackbar.Snackbar
             .make(activity!!.findViewById(R.id.main_activity_container), R.string.shopping_list_deleted,
-                Snackbar.LENGTH_LONG)
+                com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
             .setAction(R.string.undo, this::undoLastDeletedItem)
             .show()
     }

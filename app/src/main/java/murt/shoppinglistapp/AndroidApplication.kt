@@ -1,8 +1,7 @@
 package murt.shoppinglistapp
 
-import android.app.Activity
 import android.content.Context
-import android.support.multidex.MultiDex
+import androidx.multidex.MultiDex
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication

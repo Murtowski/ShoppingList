@@ -30,39 +30,39 @@ ext {
     androidCompileSdkVersion = androidTargetSdkVersion
 
     libPlatform = [
-            multidex: "com.android.support:multidex:1.0.2",
+            multidex: "androidx.multidex:multidex:2.0.0",
             kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19.3"
     ]
 
-    String supportLibrary = '28.0.0'
-    String supportConstrainLayout = '1.0.2'
+    String androidX = '1.0.0'
+    String supportConstrainLayout = '2.0.0-alpha2'
 
     libSupport = [
-            supportV7:              "com.android.support:appcompat-v7:$supportLibrary",
-            supportDesign:          "com.android.support:design:${supportLibrary}",
-            supportV4:              "com.android.support:support-v4:${supportLibrary}",
-            supportCardView:        "com.android.support:cardview-v7:${supportLibrary}",
-            supportRecyclerView:    "com.android.support:recyclerview-v7:${supportLibrary}",
-            supportVectors:         "com.android.support:support-vector-drawable:${supportLibrary}",
-            supportConstrain:       "com.android.support.constraint:constraint-layout:$supportConstrainLayout"
+            supportV7:              "androidx.appcompat:appcompat:$androidX",
+            supportDesign:          "com.google.android.material:material:$androidX",
+            supportV4:              "androidx.legacy:legacy-support-v4:${androidX}",
+            supportCardView:        "androidx.cardview:cardview:${androidX}",
+            supportRecyclerView:    "androidx.recyclerview:recyclerview:${androidX}",
+            supportVectors:         "androidx.vectordrawable:vectordrawable:${androidX}",
+            supportConstrain:       "androidx.constraintlayout:constraintlayout:$supportConstrainLayout"
     ]
 
     // Android Architecture
-    String androidArch = '1.0.0'
-    String androidArchExtension = '1.1.0'
-    String androidArchPaging = '1.0.0-alpha6'
+    String androidArchExtension = '2.0.0'
+    String androidRoom = '2.1.0-alpha01'
+    String androidArchPaging = '2.1.0-beta01'
 
     libArchitectureComponents = [
             // ViewModel, LiveData
-            commonJava8:            "android.arch.lifecycle:common-java8:$androidArchExtension", // support java8
-            extension:              "android.arch.lifecycle:extensions:$androidArchExtension",
-            compiler:               "android.arch.lifecycle:compiler:$androidArchExtension",
-            reactiveStreams:        "android.arch.lifecycle:reactivestreams:$androidArchExtension",
+            commonJava8:            "androidx.lifecycle:lifecycle-common-java8:$androidArchExtension", // support java8
+            extension:              "androidx.lifecycle:lifecycle-extensions:$androidArchExtension",
+            compiler:               "androidx.lifecycle:lifecycle-compiler:$androidArchExtension",
+            reactiveStreams:        "androidx.lifecycle:lifecycle-reactivestreams:$androidArchExtension",
             // Room
-            roomRuntime:            "android.arch.persistence.room:runtime:$androidArch",
-            roomRxJava2:            "android.arch.persistence.room:rxjava2:$androidArch",
-            roomCompiler:           "android.arch.persistence.room:compiler:$androidArch",
-            roomPaging:             "android.arch.paging:runtime:$androidArchPaging"
+            roomRuntime:            "androidx.room:room-runtime:$androidRoom",
+            roomRxJava2:            "androidx.room:room-rxjava2:$androidRoom",
+            roomCompiler:           "androidx.room:room-compiler:$androidRoom",
+            roomPaging:             "androidx.paging:paging-runtime:$androidArchPaging"
     ]
 
     String squareOkHttp = '3.9.1'
@@ -137,9 +137,7 @@ ext {
 repositories {
     mavenCentral()
 }
-//dependencies {
-//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-//}
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"

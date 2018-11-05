@@ -1,8 +1,8 @@
 package murt.shoppinglistapp.ui.shoppingListDetails
 
 import android.content.Context
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -36,7 +36,7 @@ class ShoppingListDetailsAdapter(
     val isListEditable: Boolean = false,
 //    val onDeleteClick: (ShoppingItem) -> Unit,
     val saveItem: (ShoppingItem) -> Unit
-): RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
+): androidx.recyclerview.widget.RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
 
     var editedItemPosition: Int = -1
     val mTextWatcher = EditableItemTextWatcher()
@@ -80,7 +80,7 @@ class ShoppingListDetailsAdapter(
         holder.onBindEdit(items[position], isEditable, position)
     }
 
-    inner class ShoppingItemViewHolder(val view: View): RecyclerView.ViewHolder(view),
+    inner class ShoppingItemViewHolder(val view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view),
         RecyclerViewSwipeHelper.ViewHolderSwipe {
         override val foreground = view.shopping_item_foreground_wrapper
 
