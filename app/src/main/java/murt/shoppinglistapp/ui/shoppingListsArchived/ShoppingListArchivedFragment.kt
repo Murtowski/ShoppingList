@@ -66,7 +66,7 @@ class ShoppingListArchivedFragment : MyFragment() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(ShoppingListArchivedViewModel::class.java)
 
-        mViewModel.getArchivedShoppingList().observe(this, Observer {
+        mViewModel.getArchivedShoppingList().observe(viewLifecycleOwner, Observer {
             srf_list_archived.isRefreshing = false
 
             if(it == null) return@Observer

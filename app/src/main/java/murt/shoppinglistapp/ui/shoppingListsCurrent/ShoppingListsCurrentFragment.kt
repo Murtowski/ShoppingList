@@ -70,7 +70,7 @@ class ShoppingListsCurrentFragment : MyFragment(), RecyclerViewSwipeHelper.Recyc
         mViewModel = ViewModelProviders.of(this, viewModelFactor)
             .get(ShoppingListCurrentViewModel::class.java)
 
-        mViewModel.getCurrentShoppingLists().observe(this, Observer {
+        mViewModel.getCurrentShoppingLists().observe(viewLifecycleOwner, Observer {
             srf_list_current.isRefreshing = false
 
             if (it == null) return@Observer
