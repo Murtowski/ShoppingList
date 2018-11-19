@@ -22,6 +22,9 @@ class ShoppingListDetailsViewModel @Inject constructor(
     private val cacheService: CacheService
 ): MyViewModel() {
 
+    val shoppingItemLiveData = MutableLiveData<ShoppingItem>()
+    val shoppingListLiveData = MutableLiveData<ShoppingList>()
+
     /**
      * Shopping List
      * */
@@ -90,18 +93,15 @@ class ShoppingListDetailsViewModel @Inject constructor(
             })
     }
 
-    fun deleteShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long){
+    fun deleteShoppingItem(shoppingItem: ShoppingItem, shoppingListId: Long) {
         cacheService.deleteShoppingItem(shoppingItem, shoppingListId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onComplete = {
-                Timber.i("Shopping Item deleted")
-            }, onError = {
-                Timber.e(it, "Error while deleting Shopping Item")
-            })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onComplete = {
+                    Timber.i("Shopping Item deleted")
+                }, onError = {
+                    Timber.e(it, "Error while deleting Shopping Item")
+                })
     }
-
-    val shoppingItemLiveData = MutableLiveData<ShoppingItem>()
-    val shoppingListLiveData = MutableLiveData<ShoppingList>()
 
 }

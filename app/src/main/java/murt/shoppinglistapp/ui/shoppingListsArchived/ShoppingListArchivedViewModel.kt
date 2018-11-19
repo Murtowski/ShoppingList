@@ -22,10 +22,11 @@ class ShoppingListArchivedViewModel @Inject constructor(
 
     private val archivedShoppingLists = MutableLiveData<List<ShoppingList>>()
 
+    init {
+        refreshList()
+    }
+
     fun getArchivedShoppingList(): LiveData<List<ShoppingList>>{
-        if(archivedShoppingLists.value == null){
-            refreshList()
-        }
         return archivedShoppingLists
     }
 

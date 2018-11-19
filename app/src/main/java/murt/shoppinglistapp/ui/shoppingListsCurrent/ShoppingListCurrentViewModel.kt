@@ -22,10 +22,11 @@ class ShoppingListCurrentViewModel @Inject constructor(
 
     private val currentShoppingLists = MutableLiveData<List<ShoppingList>>()
 
+    init {
+        refreshList()
+    }
+
     fun getCurrentShoppingLists(): LiveData<List<ShoppingList>> {
-        if(currentShoppingLists.value == null){
-            refreshList()
-        }
         return currentShoppingLists
     }
 
