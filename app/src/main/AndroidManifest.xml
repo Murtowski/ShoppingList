@@ -13,7 +13,8 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_shopping_list"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
