@@ -4,8 +4,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import murt.shoppinglistapp.injection.scopes.PerActivity
 import murt.shoppinglistapp.injection.scopes.PerFragment
-import murt.shoppinglistapp.ui.MyActivity
-import murt.shoppinglistapp.ui.MyFragment
 import murt.shoppinglistapp.ui.main.MainActivity
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment

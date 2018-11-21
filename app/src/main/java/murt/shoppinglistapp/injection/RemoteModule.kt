@@ -17,14 +17,15 @@ open class RemoteModule {
 
     @Singleton
     @Provides
+    fun provideRemoteService(networkService: NetworkService): RemoteService {
+        return RemoteServiceImpl(networkService)
+    }
+
+    @Singleton
+    @Provides
     fun provideNetworkService(): NetworkService {
         val isDebug = SystemTools.isDebugMode
         return NetworkServiceFactory().createNetworkService(isDebug)
     }
 
-    @Singleton
-    @Provides
-    fun provideRemoteService(networkService: NetworkService): RemoteService {
-        return RemoteServiceImpl(networkService)
-    }
 }

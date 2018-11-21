@@ -93,6 +93,10 @@ dependencies {
     annotationProcessor depDagger.daggerAndroidProcessor
     kapt depDagger.daggerAndroidProcessor
 
+    def depKodein = rootProject.ext.libDependencyInjection
+    implementation depKodein.kodeinGeneric
+    implementation depKodein.kodeinAndroid
+
 
 
 }

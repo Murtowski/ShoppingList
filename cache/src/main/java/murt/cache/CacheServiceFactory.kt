@@ -8,7 +8,7 @@ import android.content.Context
  */
 class CacheServiceFactory {
 
-    fun createRemoteService(context: Context): RoomDatabaseCache{
+    fun createCacheService(context: Context): RoomDatabaseCache{
         return Room.databaseBuilder(
             context.applicationContext,
             RoomDatabaseCache::class.java,

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_shopping_list_archived.*
 import murt.data.model.ShoppingList
 
 import murt.shoppinglistapp.R
-import murt.shoppinglistapp.ui.MyFragment
+import murt.shoppinglistapp.ui.BaseFragment
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ListOfShoppingListsAdapter
 import javax.inject.Inject
@@ -23,7 +23,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class ShoppingListArchivedFragment : MyFragment() {
+class ShoppingListArchivedFragment : BaseFragment() {
 
 
     companion object {

@@ -4,7 +4,6 @@ package murt.shoppinglistapp.ui.shoppingListsCurrent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_shopping_list_current.*
 import murt.data.model.ShoppingList
 
 import murt.shoppinglistapp.R
-import murt.shoppinglistapp.ui.MyFragment
+import murt.shoppinglistapp.ui.BaseFragment
 import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import javax.inject.Inject
@@ -23,7 +22,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class ShoppingListsCurrentFragment : MyFragment(), RecyclerViewSwipeHelper.RecyclerViewSwipeListener {
+class ShoppingListsCurrentFragment : BaseFragment(), RecyclerViewSwipeHelper.RecyclerViewSwipeListener {
 
     companion object {
         fun newInstance() = ShoppingListsCurrentFragment()
