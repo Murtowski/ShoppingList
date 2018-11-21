@@ -15,7 +15,10 @@ import murt.remote.NetworkService
 import murt.remote.NetworkServiceFactory
 import murt.remote.RemoteServiceImpl
 import murt.shoppinglistapp.injection.DaggerAppComponent
+import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsViewModelFactory
 import murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedViewModelFactory
+import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListCurrentViewModelFactory
+import murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListCurrentViewModelFactory_Factory
 import murt.shoppinglistapp.ui.utils.SystemTools
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -35,6 +38,7 @@ class AndroidApplication: DaggerApplication(), KodeinAware{
         import(androidXModule(this@AndroidApplication))
         import(remoteRepositoryModule)
         import(cacheRepositoryModule)
+        import(viewModelModules)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
@@ -55,6 +59,7 @@ class AndroidApplication: DaggerApplication(), KodeinAware{
     override fun onCreate() {
         super.onCreate()
 
+        Timber.i("$kodein")
 
         AndroidThreeTen.init(this)
 
@@ -93,9 +98,16 @@ val cacheRepositoryModule = Kodein.Module("cache"){
 /**
  * View Model
  * */
-
 val viewModelModules = Kodein.Module("viewModel"){
-    bind<ViewModelProvider.Factory>(tag = ShoppingListArchivedViewModelFactory::class.java.simpleName) with provider {
+    bind<ShoppingListArchivedViewModelFactory>(tag = ShoppingListArchivedViewModelFactory::class.java.simpleName) with provider {
         ShoppingListArchivedViewModelFactory(instance())
+    }
+
+    bind<ShoppingListCurrentViewModelFactory>(tag = ShoppingListCurrentViewModelFactory::class.java.simpleName) with provider {
+        ShoppingListCurrentViewModelFactory(instance())
+    }
+
+    bind<ShoppingListDetailsViewModelFactory>(tag = ShoppingListDetailsViewModelFactory::class.java.simpleName) with provider {
+        ShoppingListDetailsViewModelFactory(instance())
     }
 }

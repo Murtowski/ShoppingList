@@ -31,6 +31,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
+import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
 
 
@@ -66,8 +67,9 @@ class ShoppingListDetailsActivity : MyActivity(), RecyclerViewSwipeHelper.Recycl
     private val isEditable by lazy { intent.getBooleanExtra(EXTRA_EDIT_ENABLED, true) }
 
     // View Model
-    @Inject
-    lateinit var mViewModelFactory: ShoppingListDetailsViewModelFactory
+//    @Inject
+//    lateinit var mViewModelFactory: ShoppingListDetailsViewModelFactory
+    private val mViewModelFactory: ShoppingListDetailsViewModelFactory by instance(ShoppingListDetailsViewModelFactory::class.java.simpleName)
     private lateinit var mViewModel: ShoppingListDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

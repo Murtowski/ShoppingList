@@ -15,6 +15,7 @@ import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.BaseFragment
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
 import murt.shoppinglistapp.ui.shoppingListsCurrent.ListOfShoppingListsAdapter
+import org.kodein.di.generic.instance
 import javax.inject.Inject
 
 
@@ -30,8 +31,7 @@ class ShoppingListArchivedFragment : BaseFragment() {
         fun newInstance() = ShoppingListArchivedFragment()
     }
 
-    @Inject
-    lateinit var viewModelFactory: ShoppingListArchivedViewModelFactory
+    private val viewModelFactory: ShoppingListArchivedViewModelFactory by instance(ShoppingListArchivedViewModelFactory::class.java.simpleName)
     private lateinit var mViewModel: ShoppingListArchivedViewModel
 
     private val mAdapter by lazy {

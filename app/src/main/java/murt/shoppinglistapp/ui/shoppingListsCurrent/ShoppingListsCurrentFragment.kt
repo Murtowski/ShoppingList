@@ -16,6 +16,8 @@ import murt.shoppinglistapp.R
 import murt.shoppinglistapp.ui.BaseFragment
 import murt.shoppinglistapp.ui.RecyclerViewSwipeHelper
 import murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 import javax.inject.Inject
 
 
@@ -28,8 +30,7 @@ class ShoppingListsCurrentFragment : BaseFragment(), RecyclerViewSwipeHelper.Rec
         fun newInstance() = ShoppingListsCurrentFragment()
     }
 
-    @Inject
-    lateinit var viewModelFactor: ShoppingListCurrentViewModelFactory
+    private val viewModelFactor: ShoppingListCurrentViewModelFactory by instance(tag = ShoppingListCurrentViewModelFactory::class.java.simpleName)
     private lateinit var mViewModel: ShoppingListCurrentViewModel
 
     private var deletedShoppingList: ShoppingList ?= null
