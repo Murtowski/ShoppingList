@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.AsyncListDiffer
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.disposables.CompositeDisposable
@@ -36,7 +37,7 @@ class ShoppingListDetailsAdapter(
     val isListEditable: Boolean = false,
 //    val onDeleteClick: (ShoppingItem) -> Unit,
     val saveItem: (ShoppingItem) -> Unit
-): androidx.recyclerview.widget.RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
+): RecyclerView.Adapter<ShoppingListDetailsAdapter.ShoppingItemViewHolder>() {
 
     var editedItemPosition: Int = -1
     val mTextWatcher = EditableItemTextWatcher()
@@ -80,7 +81,7 @@ class ShoppingListDetailsAdapter(
         holder.onBindEdit(items[position], isEditable, position)
     }
 
-    inner class ShoppingItemViewHolder(val view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view),
+    inner class ShoppingItemViewHolder(val view: View): RecyclerView.ViewHolder(view),
         RecyclerViewSwipeHelper.ViewHolderSwipe {
         override val foreground = view.shopping_item_foreground_wrapper
 

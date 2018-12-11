@@ -12,7 +12,7 @@ import javax.inject.Inject
  */
 class RemoteServiceImpl @Inject constructor(private val networkService: NetworkService): RemoteService {
 
-    override fun getShoppingList(): Single<List<ShoppingItem>> {
+    override fun getShoppingItems(): Single<List<ShoppingItem>> {
         return networkService.getShoppingList()
             .mapResponseToBody()
     }

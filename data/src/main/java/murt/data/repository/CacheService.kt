@@ -15,6 +15,8 @@ interface CacheService {
 
     fun getShoppingList(id: Long): Single<ShoppingList>
 
+    fun getShoppingListFLowable(id: Long): Flowable<ShoppingList>
+
     fun updateShoppingListAndItems(shoppingList: ShoppingList): Completable
 
     fun updateShoppingListDescription(shoppingList: ShoppingList): Completable

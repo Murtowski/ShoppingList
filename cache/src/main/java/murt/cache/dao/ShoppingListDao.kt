@@ -19,19 +19,23 @@ interface ShoppingListDao {
 
     @Query("""SELECT * FROM ${ShoppingListCache.TABLE_NAME}
         WHERE ${ShoppingListCache.COLUMN_PARENT_ID} = :id""")
-    fun getShoppingList(id: Long): ShoppingListAndItems
+    fun getShoppingList(id: Long): ShoppingListAndItems // Single emits once
+
+    @Query("""SELECT * FROM ${ShoppingListCache.TABLE_NAME}
+        WHERE ${ShoppingListCache.COLUMN_PARENT_ID} = :id""")
+    fun getShoppingListAndItemsFlowable(id: Long): Flowable<ShoppingListAndItems>
 
     @Update()
-    fun updateShoppingList(shoppingList: ShoppingListCache)
+    fun updateShoppingListDescription(shoppingList: ShoppingListCache)
 
     @Insert()
-    fun insertShoppingList(shoppingListCache: ShoppingListCache): Long
+    fun insertShoppingListDescription(shoppingListCache: ShoppingListCache): Long
 
     @Delete()
-    fun deleteShoppingList(shoppingListCache: ShoppingListCache)
+    fun deleteShoppingListDescription(shoppingListCache: ShoppingListCache)
 
 //    @Delete
-//    fun deleteShoppingList(shoppingListAndItems: ShoppingListAndItems)
+//    fun deleteShoppingListDescription(shoppingListAndItems: ShoppingListAndItems)
 
     /**
      * Shopping items

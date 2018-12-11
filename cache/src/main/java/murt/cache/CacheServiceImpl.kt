@@ -35,10 +35,15 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
         }
     }
 
+    override fun getShoppingListFLowable(id: Long): Flowable<ShoppingList> {
+        return database.shoppingListDao().getShoppingListAndItemsFlowable(id)
+                .map { mapper.mapCacheToApp(it) }
+    }
+
     override fun updateShoppingListAndItems(shoppingList: ShoppingList): Completable {
         return Completable
             .fromAction {
-                database.shoppingListDao().updateShoppingList(
+                database.shoppingListDao().updateShoppingListDescription(
                     mapper.mapAppToCache(shoppingList)
                 )
             }
@@ -52,7 +57,7 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
     override fun updateShoppingListDescription(shoppingList: ShoppingList): Completable {
         return Completable
             .fromAction {
-                database.shoppingListDao().updateShoppingList(
+                database.shoppingListDao().updateShoppingListDescription(
                     mapper.mapAppToCache(shoppingList)
                 )
             }
@@ -67,7 +72,7 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
             .flatMap {
                 // Create object
                 Single.just(
-                    database.shoppingListDao().insertShoppingList(it)
+                    database.shoppingListDao().insertShoppingListDescription(it)
                 )
             }
             .doOnSuccess {
@@ -94,7 +99,7 @@ class CacheServiceImpl @Inject constructor(private val database: RoomDatabaseCac
 
     override fun deleteShoppingList(shoppingList: ShoppingList): Completable {
         return Completable.fromAction {
-            database.shoppingListDao().deleteShoppingList(
+            database.shoppingListDao().deleteShoppingListDescription(
                 mapper.mapAppToCache(shoppingList)
             )
         }.andThen(Completable.fromAction {
