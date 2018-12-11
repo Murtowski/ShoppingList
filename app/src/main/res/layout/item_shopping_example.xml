@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="shoppingItem"
+            type="murt.data.model.ShoppingItem"/>
+        <variable
+            name="itemClickListener"
+            type="murt.shoppinglistapp.ui.shoppingListDetails.ClickListener"/>
+
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,12 +24,14 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:background="@color/white"
+    android:onClick="@{() -> itemClickListener.onItemClick(shoppingItem)}"
     >
 
     <TextView
         android:id="@+id/item_shopping_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@{shoppingItem.title}"
         tools:text = "12.12.2019"
         style="@style/TextSmall"
         android:hint="@string/empty_items"
@@ -26,6 +41,7 @@
         android:id="@+id/item_shopping_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@{shoppingItem.updatedAt}"
         tools:text = "This is my example shopping item"
         android:hint="@string/empty_items"
         style="@style/TextMedium"
@@ -34,3 +50,5 @@
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

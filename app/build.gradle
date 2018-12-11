@@ -56,6 +56,10 @@ android {
         ignoreWarnings true
     }
 
+    dataBinding{
+        enabled = true
+    }
+
 
 }
 
