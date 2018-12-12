@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
         <variable
@@ -8,14 +11,11 @@
             type="murt.data.model.ShoppingItem"/>
         <variable
             name="itemClickListener"
-            type="murt.shoppinglistapp.ui.shoppingListDetails.ClickListener"/>
+            type="murt.shoppinglistapp.ui.example.ClickListener"/>
 
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/shopping_item_foreground_wrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,8 +24,8 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:background="@color/white"
-    android:onClick="@{() -> itemClickListener.onItemClick(shoppingItem)}"
     >
+    <!--android:onClick="@{itemClickListener.onItemClick(shoppingItem)}"-->
 
     <TextView
         android:id="@+id/item_shopping_date"

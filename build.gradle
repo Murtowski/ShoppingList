@@ -48,22 +48,49 @@ ext {
     ]
 
     // Android Architecture
-    String androidArchExtension = '2.0.0'
-    String androidRoom = '2.1.0-alpha01'
-    String androidArchPaging = '2.1.0-beta01'
+//    String androidArchExtension = '2.0.0'
+//    String androidRoom = '2.1.0-alpha01'
+//    String androidArchPaging = '2.1.0-beta01'
+
+    def lifecycle_version = "2.0.0"
 
     libArchitectureComponents = [
+            // ViewModel and LiveData
+            viewModelLiveData:      "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            // alternately - if using Java8, use the following instead of compiler
+            commonJava8:            "android.arch.lifecycle:common-java8:$lifecycle_version",
+            // ReactiveStreams support for LiveData
+            reactiveStreams:        "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // use -ktx for Kotlin
+
             // ViewModel, LiveData
-            commonJava8:            "androidx.lifecycle:lifecycle-common-java8:$androidArchExtension", // support java8
-            extension:              "androidx.lifecycle:lifecycle-extensions:$androidArchExtension",
-            compiler:               "androidx.lifecycle:lifecycle-compiler:$androidArchExtension",
-            reactiveStreams:        "androidx.lifecycle:lifecycle-reactivestreams:$androidArchExtension",
+//            commonJava8:            "androidx.lifecycle:lifecycle-common-java8:$androidArchExtension", // support java8
+//            extension:              "androidx.lifecycle:lifecycle-extensions:$androidArchExtension",
+//            compiler:               "androidx.lifecycle:lifecycle-compiler:$androidArchExtension",
+//            reactiveStreams:        "androidx.lifecycle:lifecycle-reactivestreams:$androidArchExtension",
             // Room
-            roomRuntime:            "androidx.room:room-runtime:$androidRoom",
-            roomRxJava2:            "androidx.room:room-rxjava2:$androidRoom",
-            roomCompiler:           "androidx.room:room-compiler:$androidRoom",
-            roomPaging:             "androidx.paging:paging-runtime:$androidArchPaging"
+//            roomRuntime:            "androidx.room:room-runtime:$androidRoom",
+//            roomRxJava2:            "androidx.room:room-rxjava2:$androidRoom",
+//            roomCompiler:           "androidx.room:room-compiler:$androidRoom",
+//            roomPaging:             "androidx.paging:paging-runtime:$androidArchPaging"
     ]
+
+    def room_version = "2.1.0-alpha03"
+    def paging_version = "2.1.0-rc01"
+
+    database = [
+            roomRuntime:            "androidx.room:room-runtime:$room_version",
+            roomCompiler:           "androidx.room:room-compiler:$room_version",  // use kapt for Kotlin
+            // RxJava support for Room
+            roomRxJava2:            "androidx.room:room-rxjava2:$room_version",
+            // Coroutines support for Room
+            roomCoroutines:         "androidx.room:room-coroutines:$room_version",
+
+            pagingRuntime:          "androidx.paging:paging-runtime-ktx:$paging_version", // use -ktx for Kotlin
+            // optional - RxJava support
+            pagingRxJava2:          "androidx.paging:paging-rxjava2-ktx:$paging_version" // use -ktx for Kotlin
+    ]
+
+
 
     String squareOkHttp = '3.9.1'
     String squareOkHttpInterceptor = '3.8.1'

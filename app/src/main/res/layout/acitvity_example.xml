@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="viewModel"
+            type="murt.shoppinglistapp.ui.example.ShoppingListExampleViewModel"/>
+
+    </data>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/cl_shopping_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="murt.shoppinglistapp.ui.shoppingListDetails.ShoppingListDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/toolbar_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_save"
+                    android:layout_alignParentRight="true"
+                    style="@style/ImageViewBackground"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/toolbar_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ToolbarTextAppearance"
+                    tools:text="@tools:sample/lorem"
+                    android:hint="@string/empty_title"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/toolbar_save"
+                    android:layout_alignParentLeft="true"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/toolbar_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/ToolbarTextAppearance"
+                    android:visibility="gone"
+                    android:hint="@string/name_of_your_shopping_list"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/toolbar_save"
+                    android:layout_alignParentLeft="true"
+                    />
+
+            </RelativeLayout>
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shopping_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_shopping_example"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        />
+    <!--binding:binding_adapter="@{viewModel.getLiveDataShoppingList()}"-->
+
+    <TextView
+        android:id="@+id/tv_empty_current_list_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        style="@style/TextHint"
+        android:text="@string/here_you_may_add_your_shopping_item"
+        app:layout_anchor="@id/fab_add_shopping_item"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_shopping_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:useCompatPadding="true"
+        app:srcCompat="@drawable/ic_add_24"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

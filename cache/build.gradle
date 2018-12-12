@@ -52,20 +52,34 @@ kapt {
 dependencies {
     api project(path: ':data')
 
-    def depAndroidArch = rootProject.ext.libArchitectureComponents
-    api depAndroidArch.commonJava8
-    api depAndroidArch.extension
-    kapt depAndroidArch.compiler
-    api depAndroidArch.reactiveStreams
-    // Room
-    api depAndroidArch.roomRuntime
-    implementation depAndroidArch.roomRxJava2
-    annotationProcessor depAndroidArch.roomCompiler
-    kapt depAndroidArch.roomCompiler
-    api depAndroidArch.roomPaging
+//    def depAndroidArch = rootProject.ext.libArchitectureComponents
+//    api depAndroidArch.commonJava8
+//    api depAndroidArch.extension
+//    kapt depAndroidArch.compiler
+//    api depAndroidArch.reactiveStreams
+//    // Room
+//    api depAndroidArch.roomRuntime
+//    implementation depAndroidArch.roomRxJava2
+//    annotationProcessor depAndroidArch.roomCompiler
+//    kapt depAndroidArch.roomCompiler
+//    api depAndroidArch.roomPaging
+
+    def database = rootProject.ext.database
+    api database.roomRuntime
+    kapt database.roomCompiler
+    api database.roomRxJava2
+    api database.roomCoroutines
+    api database.pagingRuntime
+    api database.pagingRxJava2
+
+
 
 
 }
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 repositories {
     mavenCentral()
 }

@@ -85,6 +85,11 @@ dependencies {
     implementation depSupportLib.supportVectors
     implementation depSupportLib.supportConstrain
 
+    def archComponents = rootProject.ext.libArchitectureComponents
+    implementation archComponents.viewModelLiveData
+    implementation archComponents.commonJava8
+    implementation archComponents.reactiveStreams
+
     def depRx = rootProject.ext.libRxJava2
     implementation depRx.rxAndroid
 

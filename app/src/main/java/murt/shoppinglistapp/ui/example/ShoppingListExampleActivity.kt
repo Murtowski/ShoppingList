@@ -1,8 +1,8 @@
-package murt.shoppinglistapp.ui.shoppingListDetails
+package murt.shoppinglistapp.ui.example
 
 import android.os.Bundle
 import android.widget.Toast
-import io.reactivex.Single
+import androidx.lifecycle.ViewModelProviders
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_shopping_list_details.*
 import murt.cache.CacheServiceFactory
 import murt.cache.CacheServiceImpl
 import murt.data.model.ShoppingItem
-import murt.data.model.ShoppingList
 import murt.data.repository.CacheService
 import murt.data.repository.RemoteService
 import murt.remote.NetworkServiceFactory
@@ -23,7 +22,7 @@ class ShoppingListExampleActivity: MyActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_list_details)
+        setContentView(R.layout.acitvity_example)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -34,28 +33,15 @@ class ShoppingListExampleActivity: MyActivity() {
         val remote = createRemoteService()
         val cache = createCacheService()
 
-        cache.getShoppingListFLowable(0)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onError = {
-                Toast.makeText(this, "Error getting data from cache", Toast.LENGTH_SHORT).show()
-            }, onNext = {
-                adapter.updateList(it.items)
-            })
-
-        remote.getShoppingList()
-            .subscribeOn(Schedulers.io())
-            .flatMapCompletable {
-                cache.updateShoppingListAndItems(it)
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onError = {
-                Toast.makeText(this, "Error downloading fresh data", Toast.LENGTH_SHORT).show()
-            }, onComplete = {
-                Timber.i("Shopping List updated!")
-
-            })
     }
+
+    private fun getViewModel(): ShoppingListExampleViewModel{
+        return ViewModelProviders.of(this).get()
+    }
+
+
+
+
 
     private fun createAdapter(): ShoppingListExampleAdapter {
         return ShoppingListExampleAdapter(saveItem = this::onClick)
