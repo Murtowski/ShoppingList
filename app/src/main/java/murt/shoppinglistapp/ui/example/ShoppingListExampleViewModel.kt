@@ -18,7 +18,7 @@ import timber.log.Timber
  * Piotr Murtowski on 12/12/2018.
  */
 class ShoppingListExampleViewModel constructor(
-    val cache: CacheService, val remote: RemoteService): MyViewModel() {
+    private val cache: CacheService, private val remote: RemoteService): MyViewModel() {
 
     private val shoppingListLiveData = MutableLiveData<ShoppingList>()
 
