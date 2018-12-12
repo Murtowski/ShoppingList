@@ -96,7 +96,7 @@ dependencies {
     def depKodein = rootProject.ext.libDependencyInjection
     implementation depKodein.kodeinGeneric
     implementation depKodein.kodeinAndroid
-
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha07'
 
 
 }

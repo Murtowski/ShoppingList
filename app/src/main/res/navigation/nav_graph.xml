@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/myActivity">
+
+    <activity
+        android:id="@+id/myActivity"
+        android:name="murt.shoppinglistapp.ui.MyActivity"
+        android:label="MyActivity"/>
+
+    <fragment
+        android:id="@+id/shoppingListsCurrentFragment"
+        android:name="murt.shoppinglistapp.ui.shoppingListsCurrent.ShoppingListsCurrentFragment"
+        android:label="fragment_shopping_list_current"
+        tools:layout="@layout/fragment_shopping_list_current"/>
+
+    <fragment
+        android:id="@+id/shoppingListArchivedFragment"
+        android:name="murt.shoppinglistapp.ui.shoppingListsArchived.ShoppingListArchivedFragment"
+        android:label="fragment_shopping_list_archived"
+        tools:layout="@layout/fragment_shopping_list_archived"/>
+
+</navigation>
