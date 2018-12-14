@@ -24,8 +24,9 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:background="@color/white"
+    android:onClick="@{itemClickListener.onItemClick(shoppingItem)}"
     >
-    <!--android:onClick="@{itemClickListener.onItemClick(shoppingItem)}"-->
+
 
     <TextView
         android:id="@+id/item_shopping_date"
